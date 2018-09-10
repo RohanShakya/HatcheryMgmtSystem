@@ -1,0 +1,90 @@
+﻿@model InventoryMgmt.Models.AddStoresModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>*@
+
+<div id="example">
+    
+    @{ 
+        Html.RenderPartial("Forms/_AddStoresPopup", Model);
+    }
+
+
+    <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "http://stores.merodoko.com/api/stores",
+                        dataSource = new kendo.data.DataSource({
+                            transport: {
+                                read:  {
+                                    url: crudServiceBaseUrl,
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url: crudServiceBaseUrl,
+                                    dataType: "json"
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl,
+                                    dataType: "json"
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl,
+                                    dataType: "json"
+                                },
+                                parameterMap: function(options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return {models: kendo.stringify(options.models)};
+                                    }
+                                }
+                            },
+                            batch: true,
+                            pageSize: 20,
+                            schema: {
+                                model: {
+                                    id: "id",
+                                    fields: {
+                                        code: { type: "string" },
+                                        displayName: { type: "string", validation: { required: true } }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        height: 550,
+                        columns: [
+                            { field:"code", title: "Code" },
+                            { field: "displayName", title:"Store Name" },
+                            //{ command: [{ text: "Edit", click: edit }, { text: "Delete", click: edit }], title: " ", width: "250px" }
+                            {template: "<input type = 'button' value='Update' />"}]
+                    });
+
+                    editWindow = $("#details")
+                       .kendoWindow({
+                           title: "Customer Details",
+                           modal: true,
+                           visible: false,
+                           resizable: false,
+                           width: 300
+                       }).data("kendoWindow");
+                });
+
+            
+
+                function edit(e) {
+                    e.preventDefault();
+
+                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                    editWindow.content(detailsTemplate(dataItem));
+                    editWindow.center().open();
+                }
+
+               
+                
+    </script>
+</div>

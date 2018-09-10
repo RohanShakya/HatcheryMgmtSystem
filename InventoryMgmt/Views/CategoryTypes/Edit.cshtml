@@ -1,0 +1,11 @@
+﻿@model InventoryMgmt.Models.CategoryTypeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    var id = (string)ViewBag.ItemCategoryId;
+}
+@{
+
+    Html.RenderPartial("Forms/_AddCategoryType", Model);
+
+}

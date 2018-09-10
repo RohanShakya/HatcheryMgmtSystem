@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model string
+@*<div>
+    @Html.ActionLink("Add new Breed", "Create","BreedEggProduction", null, new { @class = "btn btn-primary" })
+</div>*@
+
+
+<div id="ggg">
+    @(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedEggModel>()
+    .Name("BreedEggProductionid")
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.Breed);
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.BreedType);
+    /* ClientTemplate("<a href='/BreedEggProduction/Details/#=Id#'>#=Breed#</a>");*/
+    columns.Bound(p => p.TotalEggs);
+    columns.Bound(p => p.HatchingEggs);
+    columns.Bound(p => p.AgeinWeeks);
+
+    columns.Bound(p => p.DateCreated).Hidden();
+    columns.Template(@<text>option</text>).ClientTemplate(
+                                                            "<a onclick=\"updatebreedeggproduction(event,this)\" href=\"/BreedEggProduction/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletebreedeggproduction(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedEggProduction/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "</form>"
+                          );
+
+
+
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetBreedEggProduction", "BreedEggProduction", new { id = Model }))
+          .Sort(x => x.Add("AgeinWeeks").Ascending())
+     )
+    )
+</div>
+
+@(Html.Kendo().Window()
+.Name("window-update-breedeggproduction")
+.Title("Update breedeggproduction")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+
+
+)

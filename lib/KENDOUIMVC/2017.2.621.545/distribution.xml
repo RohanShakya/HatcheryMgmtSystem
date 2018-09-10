@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Distribution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2017.2.621.545</Version>
+  <Trial>false</Trial>
+  <Dependencies>
+    <Project>12ef1008-5a1b-4dba-8df9-ea9b9ae7a46c</Project>
+    <Project>540f6c2b-6d7c-4197-838f-0dd33f0895f8</Project>
+    <Project>217e8c04-602d-4121-970c-b44104d71892</Project>
+    <Project>35a351e2-3fc1-4b09-b5ca-53450a71d1f4</Project>
+    <Project>3848b7a8-c80c-4139-bb0b-f0880743c2b0</Project>
+  </Dependencies>
+</Distribution>

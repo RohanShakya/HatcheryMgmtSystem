@@ -1,0 +1,21 @@
+﻿@model Nepaltech.Entities.Feeds
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+         <dt>
+            @Html.DisplayNameFor(model => model.FeedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>

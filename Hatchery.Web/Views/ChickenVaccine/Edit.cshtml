@@ -1,0 +1,82 @@
+﻿@model Nepaltech.Models.Forms.ChickenVaccineModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<h2>Edit</h2>
+
+@Html.HiddenFor(model => model.Id)
+
+
+@*<div id="breedId">@Html.DisplayFor(model => model.BreedId)</div>*@
+@*<div id="breedId">@Html.DisplayFor(model => model.BreedVaccineId)</div>*@
+
+@*<form class="nt-form" action="/AddChicken/Details/@Model.BatchChickenId" method="post">*@
+<form action="@(Url.Action("Edit"))" method="post" class="nt-form" id="form-add-chickenvaccine">
+    @Html.HiddenFor(model => model.BatchId)
+    @Html.HiddenFor(model => model.LocationId)
+    @Html.HiddenFor(model=> model.Age)
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
+    </div>
+    @*<div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.FarmName) </div> </div>
+
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="location">Location</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Location) </div> </div>
+    </div>*@
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="vaccinationdate">Vaccination Date</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> 
+            <div>
+                 @(Html.Kendo().DatePicker()
+                  .Name("VaccinationDate")
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                 )   
+            </div> 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="vaccine">Select Vaccine</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div>
+                @(Html.Kendo().DropDownList()
+              .Name("VaccineId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Vaccine...")
+              .DataTextField("VaccineName").Template("#=VaccineName# - #=Age# days")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreedVaccines", "ChickenVaccine", new { breeds = Model.BreedId });
+                      //.Data("filterProducts");
+                  });
+              })
+                )
+                @Html.ValidationMessageFor(model => model.VaccineId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.DateCreated)
+    @Html.HiddenFor(model => model.RecommendedDate)
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @*@Html.ActionLink("Cancel", "Details", "AddChicken", new { @id = Model.BatchChickenId }, new { @class = "btn btn-primary" })*@
+    </div>
+</form>
+@*<script>
+    function filterProducts() {
+        return {
+            //breeds: $("#breedId").html()
+            breeds: "@Model.BreedId"
+        };
+    }
+</script>*@

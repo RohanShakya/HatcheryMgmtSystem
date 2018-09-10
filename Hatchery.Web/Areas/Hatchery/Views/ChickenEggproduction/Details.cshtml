@@ -1,0 +1,98 @@
+﻿@model Nepaltech.Entities.ChickenEggProduction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+      <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.BatchId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.BatchId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeinWeeks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeinWeeks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChickenId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChickenId)
+        </dd>
+
+     
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalEggs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalEggs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodEggs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoodEggs)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.SpoiltEggs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.SpoiltEggs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Farm.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Farm.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Location.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Location.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Breed.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Breed.Name)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id, batchChickenId = Model.BatchChickenId }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>

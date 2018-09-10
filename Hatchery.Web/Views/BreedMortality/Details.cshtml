@@ -1,0 +1,51 @@
+﻿@model Nepaltech.Entities.BreedMortality
+
+@{
+    ViewBag.Title = "_Details";
+}
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BreedId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BreedId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MortalityPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MortalityPercentage)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeinWeeks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgeinWeeks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id, BreedId=Model.BreedId }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>

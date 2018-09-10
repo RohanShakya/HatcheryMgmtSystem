@@ -1,0 +1,186 @@
+﻿@model Nepaltech.Models.Forms.AddChickenInFarmModel
+
+<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-batchchicken">
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BatchId"> Batch Id </label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-10"> @Html.TextBoxFor(m => m.BatchId, new { @class = "form-control" })</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="FarmId">Select Farm</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+            <div class="col-md-10">
+                @*@Html.DropDownList("farmId", null, new { @class = "form-control" })*@
+                @(Html.Kendo().DropDownList()
+              .Name("FarmId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select farm...")
+              .DataTextField("FarmName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeFarms", "AddChicken");
+                  });
+              })
+                )
+            </div>
+        </div>
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId">Select Location</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+            <div class="col-md-10">
+                @*@Html.DropDownList("locationId", null, new { @class = "form-control" })*@
+                @(Html.Kendo().DropDownList()
+              .Name("LocationId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select location...")
+              .DataTextField("LocationName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeLocations", "AddChicken", new { farmid = Model.FarmId });
+                      //.Data("filterProducts");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("FarmId")
+                )
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedId">Select Breed </label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+            <div class="col-md-10"> @Html.DropDownList("BreedId", null, new { @class = "form-control" })</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="FarmId">Imported Country</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+
+            <div class="col-md-10">
+                @(Html.Kendo().DropDownList()
+              .Name("CountryId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select country...")
+              .DataTextField("CountryName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeCountries", "AddChicken");
+                  });
+              })
+                )
+            </div>
+        </div>
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId"> Arrival Date</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-10">
+                @(Html.Kendo().DatePicker()
+                  .Name("ArrivalDate")
+                  .Value("10/10/2017")
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                )
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalMale">Total Male</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-10">
+                @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
+                @Html.TextBoxFor(m => m.TotalMale, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TotalMale, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalFemale">Total Female</label> </div> </div>
+
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-10">
+                @*<input for="TotalFemale" class="form-control" type="number" id="example-number-input">*@
+                @Html.TextBoxFor(m => m.TotalFemale, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TotalFemale, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @*@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })*@
+    </div>
+</form>
+
+@*<script>
+            function filterProducts() {
+                return {
+                    farms: $("#FarmId").val()
+                };
+            }
+</script>*@
+
+
+@*@model Nepaltech.Models.Forms.AddChickenInFarmModel
+@{
+    ViewBag.Title = "_AddChickenInFarm";
+}
+
+<h2>_AddChickenInFarm</h2>
+
+<form method="post">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label> Location </label>
+        @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label> Breed </label>
+        @Html.TextBoxFor(m => m.Breed, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Breed, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label> Date </label>
+        @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label> Total Male </label>
+        @Html.TextBoxFor(m => m.TotalMale, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TotalMale, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label> Total Female </label>
+        @Html.TextBoxFor(m => m.TotalFemale, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.TotalFemale, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</form>*@

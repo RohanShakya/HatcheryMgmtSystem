@@ -1,0 +1,92 @@
+﻿@model InventoryMgmt.Models.CategoryAddModel
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+
+@{ 
+    Html.RenderPartial("Forms/_AddCategory",Model);
+}
+
+@Html.ActionLink("create","create",null,new {@class="btn btn-primary"})
+
+    <div id="example">
+             <div id="grid"></div>
+                <script>
+                    $(document).ready(function () {
+                        var crudServiceBaseUrl = "http://stores.merodoko.com/api/Categories",
+                            dataSource = new kendo.data.DataSource({
+                                transport: {
+                                    read: {
+                                        url:  crudServiceBaseUrl,
+                                        dataType: "json"
+                                    },
+                                    update: {
+                                        url: crudServiceBaseUrl,
+                                        dataType: "json"
+                                    },
+                                    destroy: {
+                                        type: "delete",
+                                        url: crudServiceBaseUrl,
+                                        dataType: "json"
+                                    },
+                                    create: {
+                                        url: crudServiceBaseUrl,
+                                        type: "POST",
+                                        dataType: "json",
+                                        contentType: "text/plain",
+                                        accept: "text/plain"
+
+                                    },
+                                    parameterMap: function (options, operation) {
+                                        if (operation !== "read" && options.models) {
+                                            return { models: kendo.stringify(options.models) };
+                                        }
+                                    }
+                                },
+                                batch: true,
+                                pageSize: 20,
+                                schema: {
+                                    model: {
+                                        id: "id",
+                                        fields: {
+                                            Code: { type: "string", editable: true, validation: { required: true } },
+                                            Name: { type: "string", editable: true, validation: { required: true } },
+                                            Description: { type: "String", validation: { required: true } },
+
+
+
+                                        }
+
+                                    }
+                                }
+                            });
+                        $(document).ready(function () {
+
+
+                            $("#grid").kendoGrid({
+                                dataSource: dataSource,
+                                pageable: true,
+                                height: 500,
+                              
+                                
+
+                                columns: [
+                                    { field: "id", title: "id" },
+                                    { field: "Code", title: "code", type: "String", width: "250px" },
+                                    { field: "Name", title: "name", type: "String", width: "250px" },
+                                    { field: "Description", title: "description", width: "250px" },
+
+                                    { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
+                                editable: true
+
+
+
+                            });
+                        });
+
+                    });
+                    
+        </script>
+
+        </div>

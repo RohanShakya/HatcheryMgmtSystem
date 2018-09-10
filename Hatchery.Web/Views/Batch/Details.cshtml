@@ -1,0 +1,15 @@
+﻿@model Nepaltech.Entities.Batch
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@{
+    Html.RenderPartial("Forms/Batch/_Details");
+}
+@section scripts{
+<script src="~/Scripts/app/Chicken/details-chickeneggproduction.js"></script>
+<script src="~/Scripts/app/Chicken/details-chickenmortality.js"></script>
+<script src="~/Scripts/app/Chicken/details-chickenvaccine.js"></script>
+<script src="~/Scripts/app/Chicken/details-chickenfeeds.js"></script>
+}

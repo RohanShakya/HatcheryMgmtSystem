@@ -1,0 +1,88 @@
+﻿@model Nepaltech.Models.Forms.ChickenVaccineModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<h2>Edit</h2>
+
+@Html.HiddenFor(model => model.Id)
+
+
+@*<div id="breedId">@Html.DisplayFor(model => model.BreedId)</div>*@
+@*<div id="breedId">@Html.DisplayFor(model => model.BreedVaccineId)</div>*@
+
+@*<form class="nt-form" action="/AddChicken/Details/@Model.BatchChickenId" method="post">*@
+<form action="@(Url.Action("Edit"))" method="post" class="nt-form" id="form-add-chickenvaccine">
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchId, new { @name = "BatchChickenId" }) </div> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.FarmName) </div> </div>
+
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="location">Location</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Location) </div> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div>@Html.DisplayFor(m => m.Breed)</div> </div>
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="vaccine">Select Vaccine</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            @(Html.Kendo().DropDownList()
+              .Name("VaccineId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Vaccine...")
+              .DataTextField("VaccineName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreedVaccines", "ChickenVaccine", new { breeds = Model.BreedId });
+                      //.Data("filterProducts");
+                  });
+              })
+            )
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="age">Age</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-10">
+                @Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="vaccinationdate">Vaccination Date</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-10">
+                @*@Html.EditorFor(m=>m.VaccinationDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                @(Html.Kendo().DatePicker()
+                  .Name("VaccinationDate")
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                )
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="recommendeddate">Recommended Date</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div class="col-10"> <input class="form-control" type="datetime-local" value="2017-01-01T13:45:00" name="RecommendedDate"> </div> </div>
+    </div>
+    @Html.HiddenFor(model => model.DateCreated)
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @*@Html.ActionLink("Cancel", "Details", "AddChicken", new { @id = Model.BatchChickenId }, new { @class = "btn btn-primary" })*@
+    </div>
+</form>
+<script>
+    function filterProducts() {
+        return {
+            //breeds: $("#breedId").html()
+            breeds: "@Model.BreedId"
+        };
+    }
+</script>

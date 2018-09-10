@@ -1,0 +1,79 @@
+﻿@model Nepaltech.Models.Forms.ChickenEggProductionModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Create</h2>
+
+@Html.HiddenFor(model => model.Id)
+
+
+
+
+<form class="nt-form" action="" method="post">
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchChickenId, new { @name = "BatchChickenId" }) </div> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.FarmName) </div> </div>
+
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="location">Location</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Location) </div> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div>@Html.DisplayFor(m => m.Breed)</div> </div>
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="ageinweeks">AgeinWeeks</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div>
+                @Html.EditorFor(model => model.AgeinWeeks, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AgeinWeeks, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="TotalEggs">TotalEggs</label> </div> </div>
+    <div class="col-md-offset-0 col-md-3">
+        <div class="col-10">
+            <div>
+                @Html.EditorFor(model => model.TotalEggs, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TotalEggs, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="GoodEggs">GoodEggs</label> </div> </div>
+    <div class="col-md-offset-0 col-md-3">
+        <div>
+            @Html.EditorFor(model => model.GoodEggs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GoodEggs, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="SpoiltEggs">SpoiltEggs</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div>
+                @Html.EditorFor(model => model.SpoiltEggs, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SpoiltEggs, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.DateCreated)
+<div>
+    <input type="submit" value="Save" class="btn btn-default" />
+    @Html.ActionLink("Cancel", "Index", "AddChicken", new { @class = "btn btn-primary" })
+  </div>
+</form>
+<script>
+    function filterProducts() {
+        return {
+            //breeds: $("#breedId").html()
+            breeds: "@Model.BreedId"
+        };
+    }
+</script>

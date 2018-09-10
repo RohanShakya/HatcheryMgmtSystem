@@ -1,0 +1,54 @@
+﻿@model Nepaltech.Entities.BreedFeeds
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Breed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Breed.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feed.FeedName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenderId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+</p>

@@ -1,0 +1,18 @@
+﻿/*theme 1*/
+/*button colors*/
+/*button colors*/
+/*theme 1*/
+/*theme 2*/
+/*theme 2*/
+/*theme color 3*/
+/*theme color 3*/
+.ms-body {
+  position: relative; }
+  .ms-body footer {
+    position: absolute;
+    width: 100%;
+    padding: 10px 15px;
+    background: #0078D7;
+    color: white;
+    bottom: 0; }
+

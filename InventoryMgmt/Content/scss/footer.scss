@@ -1,0 +1,13 @@
+﻿@import "_theme_color.scss";
+
+.ms-body {
+    position:relative;
+    footer {
+        position:absolute;
+        width:100%;
+        padding: 10px 15px;
+        background: $themeColor;
+        color: white;
+        bottom:0;
+    }
+}

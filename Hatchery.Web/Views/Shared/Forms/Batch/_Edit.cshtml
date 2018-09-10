@@ -1,0 +1,190 @@
+﻿@model Nepaltech.Models.Forms.BatchModel
+@{
+    ViewBag.Title = "_Edit";
+}
+
+@*<h2>_EditChickenInFarm</h2>*@
+
+<form action="@(Url.Action("Edit"))" method="post" class="nt-form" id="form-add-batch">
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="Code"> Code </label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div> @Html.Kendo().TextBoxFor(m => m.Code)</div>
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedId">Select Breed</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @(Html.Kendo().DropDownList()
+              .Name("BreedId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Breed...")
+              .DataTextField("BreedName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreeds", "Batch");
+                  });
+              })
+                    )
+                    @Html.ValidationMessageFor(model => model.BreedId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> @Html.LabelFor(m=>m.BreedTypeId, "Select BreedType") </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                @(Html.Kendo().DropDownListFor(m => m)
+                .Name("BreedTypeId")
+          .DataTextField("BreedType")
+          .DataValueField("Id")
+          .OptionLabel("Select BreedType...")
+          .HtmlAttributes(new { id = "breedtype", data_value_primitive = "true" })
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("GetCascadeBreedTypes", "Batch").Data("filterProducts").Type(HttpVerbs.Get);
+              })
+              .ServerFiltering(true);
+          }).Enable(false)
+          .AutoBind(false)
+          //.CascadeFrom("TableId")
+          .CascadeFrom("BreedId")
+                )
+                @Html.ValidationMessageFor(model => model.BreedTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> @Html.LabelFor(m => m.CountryId, "Imported Country") </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+
+                <div>
+                    @(Html.Kendo().DropDownList()
+              .Name("CountryId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select country...")
+              .DataTextField("CountryName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeCountries", "AddChicken");
+                  });
+              })
+                    )
+                    @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId"> Arrival Date</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @(Html.Kendo().DatePicker()
+                  .Name("ArrivalDate")
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                    )
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalMale">Total Male</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.TotalMale).HtmlAttributes(new { min = "0" })
+                    @Html.ValidationMessageFor(model => model.TotalMale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class ="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalFemale">Total Female</label> </div> </div>
+
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.TotalFemale).HtmlAttributes(new { min = "0" })
+                    @Html.ValidationMessageFor(model => model.TotalFemale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="DeadMale">Dead Male</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.DeadMale).HtmlAttributes(new { min = "0" })
+                    @Html.ValidationMessageFor(model => model.DeadMale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="DeadFemale">Dead Female</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.DeadFemale).HtmlAttributes(new { min = "0" })
+                    @Html.ValidationMessageFor(model => model.DeadFemale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalCost"> Total Cost </label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div> @Html.Kendo().IntegerTextBoxFor(m => m.TotalCost).HtmlAttributes(new { min = "0" })</div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="Closed"> Close Batch </label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                <div> @Html.Kendo().CheckBoxFor(m=>m.Closed)</div>
+            </div>
+        </div>
+
+            @Html.HiddenFor(model => model.DateCreated)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+            @*@Html.ActionLink("Back to List", "Index")*@
+        </div>
+    </div>
+</form>
+
+    <div>
+
+    </div>
+
+    @*<script>
+        function filterProducts() {
+            return {
+                farms: $("#FarmId").val()
+            };
+        }
+    </script>*@

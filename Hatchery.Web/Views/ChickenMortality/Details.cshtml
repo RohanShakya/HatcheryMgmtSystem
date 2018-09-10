@@ -1,0 +1,105 @@
+﻿@model Nepaltech.Entities.ChickenMortality
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>ChickenMortalityModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.BatchId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.BatchId)
+        </dd>
+                <dt>
+            @Html.DisplayNameFor(model => model.MortalityPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MortalityPercentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChickenId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChickenId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEntry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEntry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeadChickenMale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeadChickenMale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeadChickenFemale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeadChickenFemale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Farm.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Farm.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Location.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Location.Location)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.Breed.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchChicken.Breed.Name)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.BatchChicken.BreedId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BreedId)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id, batchChickenId = Model.BatchChickenId }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>

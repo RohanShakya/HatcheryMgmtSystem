@@ -1,0 +1,140 @@
+﻿@model Nepaltech.Entities.Feeds
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Feeds </h2>
+
+<div>
+    @Html.ActionLink("Add new Feed", "Create", null, new { @class = "btn btn-primary",id="add-feed" })
+</div><div id="example">
+    @(Html.Kendo().Grid<Nepaltech.Entities.Feeds>()
+.Name("grid")
+.Columns(columns =>
+{
+columns.Bound(p => p.Id).Hidden();
+
+columns.Bound(p => p.FeedName).ClientTemplate("<a href='/Feed/Details/#=Id#'>#=FeedName#</a>");
+columns.Bound(p => p.Price).ClientTemplate("Rs " + "#=Price#" +" /-");
+columns.Template(@<text>option</text>).ClientTemplate(
+                                                               "<a onclick=\"updatefeeds(event,this)\" href=\"/feed/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletefeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Feed/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "</form>"
+
+                          );
+
+
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetFeeds", "Feed"))
+        .Sort(x => x.Add("FeedName").Ascending())
+     )
+    )
+</div>
+
+
+
+
+
+
+@(Html.Kendo().Window()
+.Name("window-update-feed")
+.Title("Update Feed")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+
+
+)
+
+
+@section scripts{
+    <script type="text/javascript">
+        var chargetypeUpdateWindow;
+        var feedgrid;
+
+        function updatefeeds(e, link) {
+            e.preventDefault();
+            $.get(link.href, null, function (response) {
+                chargetypeUpdateWindow.open();
+                chargetypeUpdateWindow.center();
+                chargetypeUpdateWindow.content(response);
+
+            });
+
+        }
+        function deletefeeds(e, element) {
+            e.preventDefault();
+            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+
+                $.ajax({
+                    type: "POST",
+                    url: element.action,
+                    data: null,
+                    success: function (data, statusCode, xhr) {
+                        if (data === 1) {
+                            feedgrid.dataSource.read();
+                            updateBillingDetail();
+                        }
+                    },
+                    error: function (xhr, errorType, exception) { //Triggered if an error communicating with server  
+                        var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText  
+                        alert(xhr.statusText);
+                    }
+
+
+                });
+
+
+            };
+        }
+
+
+        $(function () {
+            chargetypeUpdateWindow = $('#window-update-feed').data('kendoWindow');
+            feedgrid = $('#grid ').data('kendoGrid');
+            $('#add-feed').click(function (e) {
+
+                $.get($(this).attr('href'), null, function (response) {
+                    chargetypeUpdateWindow.content(response);
+                    chargetypeUpdateWindow.open();
+                    chargetypeUpdateWindow.center();
+                });
+                e.preventDefault();
+            });
+
+            $('body').on('submit', '#form-add-feed', function (e) {
+                e.preventDefault();
+              
+                $.post($(this).attr('action'), $(this).serialize(), function (response) {
+                    if (response == 1) {
+                        chargetypeUpdateWindow.close();
+                        feedgrid.dataSource.read();
+                    } else {
+                        chargetypeUpdateWindow.content(response);
+
+                    }
+
+                });
+               
+
+            });
+
+       })
+
+
+
+
+    </script>
+    }

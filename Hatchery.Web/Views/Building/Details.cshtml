@@ -1,0 +1,32 @@
+﻿
+@model Nepaltech.Entities.Building
+
+@*<h2>_Details</h2>*@
+
+<div>
+    @*<h4>Locations</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Buildings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Buildings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HatcheryFarm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HatcheryFarm.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+</p>

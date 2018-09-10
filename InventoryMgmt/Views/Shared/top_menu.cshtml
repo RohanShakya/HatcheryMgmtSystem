@@ -1,0 +1,177 @@
+﻿<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Home")" class="navbar-brand">Inventory Management</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav menu">
+                  
+                    <li class="menuLi dropdown">
+                        <a href="@Url.Action("Index","Home")" class="dropdown-toggle mainA" data-toggle="dropdown" aria-label="home">
+                            Home
+                        </a>
+                        <ul class="dropdown-menu drop-menu">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">Menu 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 1</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menuLi">
+                        <a href="@Url.Action("Contact","Home")"  class="dropdown-toggle mainA" data-toggle="dropdown"  aria-label="contact">
+                            Contact
+                        </a>
+                        <ul class="dropdown-menu drop-menu">
+                            <li>
+                                <a href="@Url.Action("Contact","Home")">Contact 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact 1</a>
+                            </li>
+                        </ul>
+                    </li>
+                 
+                </ul>
+                <ul class="right">
+                    <li id="search">
+                        <form action="/" method="post">
+                            <input type="search" name="search" value="" placeholder="Search" />
+                        </form>
+                    </li>
+                    <li class="dropdown menuLi">
+                        <a class="dropdown-toggle mainA" data-toggle="dropdown" href="#!"><img src="~/Content/images/identityImage.png" alt="identity image" />
+                         </a>
+                        <ul class="dropdown-menu dropdown-menu-right drop-menu drop-profile">
+                            <li id="drop-title">
+                                    <img src="~/Content/images/identityImage.png" alt="Alternate Text" />
+                                    <span>Mahesh Sunuwar <br /> msunuwar2@gmail.com</span>
+
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-alert"></i>
+                                    Notification
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                    Security
+                                </a>
+                            </li>
+                            @*<li id="seperator"></li>*@
+                            <li id="signout">
+                                <a href="#">Sign out</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <div class="sub">
+                    <ul class="submenu dashboard">
+                        <li>
+                            <a class="active" href="#">Dashboard 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard 1</a>
+                        </li>
+                    </ul>
+                    <ul class="submenu home">
+                        <li>
+                            <a class="active" href="#">home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">home 1</a>
+                        </li>
+                    </ul>
+                    <ul class="submenu contact">
+                        <li>
+                            <a class="active" href="#">contact 1</a>
+                        </li>
+                        <li>
+                            <a href="#">contact 1</a>
+                        </li>
+                        <li>
+                            <a href="#">contact 1</a>
+                        </li>
+                        <li>
+                            <a href="#">contact 1</a>
+                        </li>
+                    </ul>
+                </div>
+               
+
+            </div>
+        </div>
+       
+    </div>
+    @*<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VsLayout</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav menu">
+                <li>
+                    <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="dropdown-toggle" data-toggle="#dropdown" data-target="#dropdown">
+                        Dashboard
+                    </a>
+                    <ul class="dropdown-menu" id="dropdown">
+                        <li>a</li>
+                        <li>b</li>
+                    </ul>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Contact">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+   
+</nav>
+

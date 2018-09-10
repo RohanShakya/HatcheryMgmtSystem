@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+       .nt-form .row {
+    margin-top: 10px;
+}
+    </style>
+
+    <link href="@Url.Content("~/Content/kendo/2017.3.1026/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.3.1026/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2017.3.1026/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2017.3.1026/kendo.all.min.js")"></script>
+    <script src="~/Scripts/kendo/2017.2.621/kendo.aspnetmvc.min.js"></script>
+    
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li> <a href="@(Url.Action("Index","Batch",new { area=""}))"> Batch </a> </li>
+                    <li> <a href="@(Url.Action("Index","AddChicken",new { area=""}))"> Hatchery </a> </li>
+                    <li> <a href="@(Url.Action("Index","Breed",new { area=""}))"> Breeds </a> </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Settings <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li> <a href="@(Url.Action("Index","Farms",new { area=""}))"> Farms </a> </li>
+                            <li><a href="@(Url.Action("Index","Building",new { area = "" }))">Building</a> </li>
+                            <li> <a href="@(Url.Action("Index","Location",new { area=""}))"> Rooms </a> </li>
+                            <li><a href="@(Url.Action("Index","Breed",new { area=""}))"> Breeds </a> </li>
+                            <li><a href="@(Url.Action("Index","BreedType",new { area=""}))"> BreedType </a> </li>
+                            <li><a href="@(Url.Action("Index","Country",new { area=""}))"> Country </a> </li>
+                            <li><a href="@(Url.Action("Index","Vaccine",new { area=""}))"> Vaccine </a> </li>
+                            <li><a href="@(Url.Action("Index","Feed",new { area=""}))"> Feed </a> </li>
+                            <li><a href="@(Url.Action("Index","Medicine",new { area=""}))"> Medicine </a> </li>
+                        
+
+                            @*<li role="separator" class="divider"></li>*@
+                          
+                        </ul>
+                        </li>
+                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                  
+                @Html.Partial("_LoginPartial")
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+   
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

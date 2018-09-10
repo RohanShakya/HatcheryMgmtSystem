@@ -1,0 +1,27 @@
+﻿@model Nepaltech.Entities.Vaccine
+
+<div>
+    <h4>VaccineModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,102 @@
+﻿@using Nepaltech.Models.ApiModels
+@model Nepaltech.Entities.Breed
+
+@{
+    ViewBag.Title = "_Details";
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">BreedVaccine</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">BreedFeed</a></li>
+        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Mortality</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">EggProduction</a></li>
+        <li role="presentation"><a href="#breedWeight" aria-controls="breedWeight" role="tab" data-toggle="tab">Breed Weight</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div>
+                <a href="@(Url.Action("Create","BreedVaccine", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedvaccine">Add BreedVaccine</a>
+            </div>
+            @{
+                // Html.RenderPartial("~/Views/BreedVaccine/Index.cshtml", new Nepaltech.Models.Forms.BreedVaccineModel());
+                Html.RenderPartial("~/Views/BreedVaccine/Index.cshtml", Model.Id);
+            }
+        </div>
+        @*<div role="tabpanel" class="tab-pane" id="profile">
+                <div>
+                    <a href="@(Url.Action("Create","BreedFeed", new { id = Model.Id }))" class="btn btn-primary" id="btn-add-breedfeeds">Add BreedFeed</a>
+                </div>
+                @{
+
+                    Html.RenderPartial("~/Views/BreedFeed/Index.cshtml", new Nepaltech.Models.Forms.BreedFeedModel());
+                }
+            </div>*@
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <div>
+
+                <a href="@(Url.Action("Create","BreedFeed", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedfeeds">Add Breed Feeds</a>
+            </div>
+            @{
+                //Html.RenderPartial("~/Views/ChickenFeeds/Index.cshtml", new Nepaltech.Models.Forms.ChickenFeedModel());
+                Html.RenderPartial("~/Views/Breedfeed/Index.cshtml", Model.Id);
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="messages">
+
+            <div>
+
+                <a href="@(Url.Action("Create","BreedMortality", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-BreedMortality">Add BreedMortality</a>
+            </div>
+            @{
+                // Html.RenderPartial("~/Views/BreedMortality/Index.cshtml", new Nepaltech.Models.Forms.BreedMortalityModel());
+                Html.RenderPartial("~/Views/BreedMortality/Index.cshtml", Model.Id);
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings">
+            <div>
+
+                <a href="@(Url.Action("Create","BreedEggProduction", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedeggproduction">Add EggProduction</a>
+            </div>
+            @{
+                //  Html.RenderPartial("~/Views/BreedEggProduction/Index.cshtml", new Nepaltech.Models.Forms.BreedEggModel());
+                Html.RenderPartial("~/Views/BreedEggProduction/Index.cshtml", Model.Id);
+            }
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="breedWeight">
+            <div>
+
+                <a href="@(Url.Action("Create","BreedWeight", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedweight">Add Breed Weight</a>
+            </div>
+            @{
+                Html.RenderPartial("~/Views/BreedWeight/Index.cshtml", new Nepaltech.Models.Forms.BreedWeightModel());
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@model Nepaltech.Models.Forms.BreedTypesModel
+
+@{
+    ViewBag.Title = "_Add";
+}
+
+@*<h2>_Add</h2>*@
+
+<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-breedtype">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-md-3">@Html.LabelFor(model => model.Breed)</div>
+            <div class="col-md-6"> 
+                @(Html.Kendo().DropDownList()
+              .Name("BreedId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select breed...")
+              .DataTextField("BreedName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreeds", "BreedType");
+                  });
+              })
+                )
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3"> @Html.LabelFor(model => model.BreedType) </div>
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(m => m.BreedType)
+                @Html.ValidationMessageFor(model => model.BreedType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+

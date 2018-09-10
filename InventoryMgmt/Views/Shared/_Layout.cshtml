@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+
+
+    <title>@ViewData["Title"] - Inventory Management</title>
+    @Scripts.Render("~/bundles/jquery")
+
+        @Html.Partial("cssAndjs/shared_css/head_css")
+    	<link href="@Url.Content("~/Content/kendo/2017.3.1026/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/kendo/2017.3.1026/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+	<script src="@Url.Content("~/Scripts/kendo/2017.3.1026/jquery.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2017.3.1026/jszip.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/kendo/2017.3.1026/kendo.all.min.js")"></script>
+</head>
+<body>
+    @Html.Partial("top_menu")
+    <div class="ms-body">  
+        <div class="main-body">
+            @RenderSection("breadcrumb", required: false)
+           
+            @RenderBody()
+        </div>
+        
+        @Html.Partial("footer")
+    </div>
+
+    @Html.Partial("cssAndjs/shared_js/bottom_js")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

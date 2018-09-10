@@ -1,0 +1,72 @@
+﻿@model Nepaltech.Models.Forms.BatchShiftingChickenModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+        <form action="@(Url.Action("Create"))" method="post" class="nt-form">
+
+            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BatchId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BatchId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="row">
+                <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchcode">Batch Code</label> </div> </div>
+                <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchCode) </div> </div>
+
+                <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="DateEntry">DateEntry</label> </div> </div>
+                <div class="col-md-offset-0 col-md-3">
+                    <div class="col-10" name="DateEntry">
+                        @(Html.Kendo().DatePicker()
+                          .Name("DateEntry")
+                          .Value("10/10/2017")
+                          .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                        )
+                    </div>
+                </div>
+            </div>
+    <table class="table">
+        <tr>
+            <th>Room No </th>
+            <th>TotalMalePrevious </th>
+            <th>TotalFemalePrevious</th>
+            <th>TotalMale</th>
+            <th>TotalFemale</th>
+        </tr>
+         @for (int i = 0; i < Model.batchshifting.Count; i++)
+        {
+            <tr>
+                <td>@(Model.batchshifting[i].Location) </td>
+                <td>
+     @Html.DisplayFor(m => m.batchshifting[i].TotalMalePrevious) 
+</td>
+                <td>
+                    @Html.Kendo().NumericTextBoxFor(m => m.batchshifting[i].TotalMale)
+                </td>
+                <td>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.batchshifting[i].TotalFemale)
+                </td>
+               
+
+            </tr>
+        }
+
+    </table>
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @Html.ActionLink("Cancel", "Index", "AddChicken", new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("Cancel", "Details", "AddChicken", new { @id = Model.BatchChickenId }, new { @class = "btn btn-primary" })*@
+    </div>
+    </form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

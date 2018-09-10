@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D4DE389-7788-4F99-B43A-791240179658}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nepaltech</RootNamespace>
+    <AssemblyName>Nepaltech</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\InventoryMgmt\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>..\InventoryMgmt\bin\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Businesses\ListMortalityReports.cs" />
+    <Compile Include="Businesses\FarmService.cs" />
+    <Compile Include="Businesses\Santosh.cs" />
+    <Compile Include="Businesses\Sunil.cs" />
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\BreedTypes.cs" />
+    <Compile Include="Entities\Building.cs" />
+    <Compile Include="Entities\Medicine.cs" />
+    <Compile Include="Migrations\201804041136253_InitialHatchery.cs" />
+    <Compile Include="Migrations\201804041136253_InitialHatchery.Designer.cs">
+      <DependentUpon>201804041136253_InitialHatchery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050940252_Breedtype added in BreedFeeds.cs" />
+    <Compile Include="Migrations\201804050940252_Breedtype added in BreedFeeds.Designer.cs">
+      <DependentUpon>201804050940252_Breedtype added in BreedFeeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090921201_BreedTypes added in BreedMortality.cs" />
+    <Compile Include="Migrations\201804090921201_BreedTypes added in BreedMortality.Designer.cs">
+      <DependentUpon>201804090921201_BreedTypes added in BreedMortality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090940266_BreedType added on BreedEggProduction.cs" />
+    <Compile Include="Migrations\201804090940266_BreedType added on BreedEggProduction.Designer.cs">
+      <DependentUpon>201804090940266_BreedType added on BreedEggProduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090948530_breedType added in BreedWeight.cs" />
+    <Compile Include="Migrations\201804090948530_breedType added in BreedWeight.Designer.cs">
+      <DependentUpon>201804090948530_breedType added in BreedWeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804091032373_sunil.cs" />
+    <Compile Include="Migrations\201804091032373_sunil.Designer.cs">
+      <DependentUpon>201804091032373_sunil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804091034255_rohan.cs" />
+    <Compile Include="Migrations\201804091034255_rohan.Designer.cs">
+      <DependentUpon>201804091034255_rohan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804120803562_santosh.cs" />
+    <Compile Include="Migrations\201804120803562_santosh.Designer.cs">
+      <DependentUpon>201804120803562_santosh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804130848011_buildinglocation.cs" />
+    <Compile Include="Migrations\201804130848011_buildinglocation.Designer.cs">
+      <DependentUpon>201804130848011_buildinglocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804130925449_building added in addchicken.cs" />
+    <Compile Include="Migrations\201804130925449_building added in addchicken.Designer.cs">
+      <DependentUpon>201804130925449_building added in addchicken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151101146_batch closed.cs" />
+    <Compile Include="Migrations\201804151101146_batch closed.Designer.cs">
+      <DependentUpon>201804151101146_batch closed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804181109116_shifteddate.cs" />
+    <Compile Include="Migrations\201804181109116_shifteddate.Designer.cs">
+      <DependentUpon>201804181109116_shifteddate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804190837066_shifteddateNullable.cs" />
+    <Compile Include="Migrations\201804190837066_shifteddateNullable.Designer.cs">
+      <DependentUpon>201804190837066_shifteddateNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804221126552_parentIdInAddChicken.cs" />
+    <Compile Include="Migrations\201804221126552_parentIdInAddChicken.Designer.cs">
+      <DependentUpon>201804221126552_parentIdInAddChicken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809060623575_batchCount.cs" />
+    <Compile Include="Migrations\201809060623575_batchCount.Designer.cs">
+      <DependentUpon>201809060623575_batchCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Forms\BatchModel.cs" />
+    <Compile Include="Models\Forms\BreedTypesModel.cs" />
+    <Compile Include="Models\Forms\BuildingsModel.cs" />
+    <Compile Include="Models\Forms\MedicineModel.cs" />
+    <Compile Include="Models\MortalityReportModel.cs" />
+    <Compile Include="Entities\BreedMortality.cs" />
+    <Compile Include="Entities\BreedWeight.cs" />
+    <Compile Include="Entities\BreedEggProductions.cs" />
+    <Compile Include="Entities\ChickenEggProduction.cs" />
+    <Compile Include="Entities\ChickenMortality.cs" />
+    <Compile Include="Entities\ChickenFeeds.cs" />
+    <Compile Include="Models\VaccineReport.cs" />
+    <Compile Include="Entities\ChickenWeight.cs" />
+    <Compile Include="Entities\ChickenVaccine.cs" />
+    <Compile Include="Entities\AddChickenInFarm.cs" />
+    <Compile Include="Entities\Batch.cs" />
+    <Compile Include="Entities\Breed.cs" />
+    <Compile Include="Entities\BreedChicken.cs" />
+    <Compile Include="Entities\BreedFeeds.cs" />
+    <Compile Include="Entities\BreedVaccine.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Farm.cs" />
+    <Compile Include="Entities\Feeds.cs" />
+    <Compile Include="Entities\Genders.cs" />
+    <Compile Include="Entities\Interfaces\IBatchCicken.cs" />
+    <Compile Include="Entities\Interfaces\IBreedVaccine.cs" />
+    <Compile Include="Entities\Locations.cs" />
+    <Compile Include="Entities\Vaccine.cs" />
+    <Compile Include="HatcheryMappingConfig.cs" />
+    <Compile Include="Helper\MappingHelper.cs" />
+    <Compile Include="Models\ApiModels\BatchChickenDataModel.cs" />
+    <Compile Include="Models\ApiModels\BreedVaccineDataModel.cs" />
+    <Compile Include="Models\FeedReport.cs" />
+    <Compile Include="Models\Forms\AddChickenInFarmModel.cs" />
+    <Compile Include="Models\Forms\BreedEggModel.cs" />
+    <Compile Include="Models\Forms\BreedWeightModel.cs" />
+    <Compile Include="Models\Forms\ChickenEggProductionModel.cs" />
+    <Compile Include="Models\Forms\ChickenMortalityModel.cs" />
+    <Compile Include="Models\Forms\BreedMortalityModel.cs" />
+    <Compile Include="Models\Forms\BreedsModel.cs" />
+    <Compile Include="Models\Forms\BreedVaccineModel.cs" />
+    <Compile Include="Models\Forms\ChickenFarmViewModel.cs" />
+    <Compile Include="Models\Forms\ChickenFeedModel.cs" />
+    <Compile Include="Models\Forms\ChickenVaccineModel.cs" />
+    <Compile Include="Models\Forms\CountryModel.cs" />
+    <Compile Include="Models\Forms\FarmsModel.cs" />
+    <Compile Include="Models\Forms\BreedFeedModel.cs" />
+    <Compile Include="Models\Forms\FeedModel.cs" />
+    <Compile Include="Models\Forms\LocationsModel.cs" />
+    <Compile Include="Models\Forms\VaccineModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\Data\IDataContext.cs" />
+    <Compile Include="Shared\Data\IRepository.cs" />
+    <Compile Include="Shared\Data\IUnitOfWork.cs" />
+    <Compile Include="Web\HatcheryController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\" />
+    <Folder Include="Web\FormModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804041136253_InitialHatchery.resx">
+      <DependentUpon>201804041136253_InitialHatchery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050940252_Breedtype added in BreedFeeds.resx">
+      <DependentUpon>201804050940252_Breedtype added in BreedFeeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090921201_BreedTypes added in BreedMortality.resx">
+      <DependentUpon>201804090921201_BreedTypes added in BreedMortality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090940266_BreedType added on BreedEggProduction.resx">
+      <DependentUpon>201804090940266_BreedType added on BreedEggProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090948530_breedType added in BreedWeight.resx">
+      <DependentUpon>201804090948530_breedType added in BreedWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804091032373_sunil.resx">
+      <DependentUpon>201804091032373_sunil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804091034255_rohan.resx">
+      <DependentUpon>201804091034255_rohan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804120803562_santosh.resx">
+      <DependentUpon>201804120803562_santosh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804130848011_buildinglocation.resx">
+      <DependentUpon>201804130848011_buildinglocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804130925449_building added in addchicken.resx">
+      <DependentUpon>201804130925449_building added in addchicken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151101146_batch closed.resx">
+      <DependentUpon>201804151101146_batch closed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804181109116_shifteddate.resx">
+      <DependentUpon>201804181109116_shifteddate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804190837066_shifteddateNullable.resx">
+      <DependentUpon>201804190837066_shifteddateNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804221126552_parentIdInAddChicken.resx">
+      <DependentUpon>201804221126552_parentIdInAddChicken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809060623575_batchCount.resx">
+      <DependentUpon>201809060623575_batchCount.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

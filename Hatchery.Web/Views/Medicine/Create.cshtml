@@ -1,0 +1,83 @@
+﻿@model Nepaltech.Models.Forms.MedicineModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-Medicine">
+
+    @*@Html.HiddenFor(m => m.BreedId)
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedID">Breed Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">@Html.DisplayFor(m => m.Breed)</div>
+    </div>*@
+    <div class=" row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="VaccineId">Select Breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-12">
+
+                @(Html.Kendo().DropDownList()
+              .Name("BreedId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Breed...")
+              .DataTextField("BreedName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreeds", "Medicine");
+                  });
+              })
+                )
+            </div>
+            @Html.ValidationMessageFor(model => model.BreedId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="medicinename">MedicineName</label> </div> </div>
+        <div class="col-md-offset-2 col-md-4">
+            <div class="col-11">
+                @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
+                @Html.TextBoxFor(m => m.MedicineName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MedicineName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="diseaseName">DiseaseName</label> </div> </div>
+        <div class="col-md-offset-2 col-md-4">
+            <div class="col-10">
+                @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
+                @Html.TextBoxFor(m => m.DiseaseName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DiseaseName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="RecomendedDoctor">RecomendedDoctor</label> </div> </div>
+        <div class="col-md-offset-2 col-md-4">
+            <div class="col-10">
+                @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
+                @Html.TextBoxFor(m => m.RecomendedDoctor, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RecomendedDoctor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="date">Date</label> </div> </div>
+        <div class="col-md-offset-2 col-md-4">
+            <div class="col-10">
+
+                @(Html.Kendo().DatePicker()
+                  .Name("Date")
+                  .Value(DateTime.Now)
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                )
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</form>

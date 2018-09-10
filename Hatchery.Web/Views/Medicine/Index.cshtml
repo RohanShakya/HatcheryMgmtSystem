@@ -1,0 +1,140 @@
+﻿@model Nepaltech.Entities.Medicine
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Medicine </h2>
+
+<div>
+    @Html.ActionLink("Add new Medicine", "Create", null, new { @class = "btn btn-primary", id = "add-medicine" })
+</div><div id="example">
+    @(Html.Kendo().Grid<Nepaltech.Entities.Medicine>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Breed);
+    columns.Bound(p => p.MedicineName);
+    columns.Bound(p => p.DiseaseName);
+    columns.Bound(p => p.RecomendedDoctor);
+    columns.Bound(p => p.Date).Format("{0:MMM dd,yyyy, ddd}");
+    columns.Template(@<text>option</text>).ClientTemplate(
+                                                               "<a onclick=\"updateMedicine(event,this)\" href=\"/Medicine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deleteMedicine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Medicine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "</form>"
+
+                          );
+
+
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetMedicine", "Medicine"))
+        .Sort(x=>x.Add("MedicineName").Ascending())
+     )
+    )
+</div>
+
+
+
+
+
+
+@(Html.Kendo().Window()
+.Name("window-update-Medicine")
+.Title("Update Medicine")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+
+
+)
+
+
+@section scripts{
+    <script type="text/javascript">
+        var MedicineUpdateWindow;
+        var Medicinegrid;
+
+        function updateMedicine(e, link) {
+            e.preventDefault();
+            $.get(link.href, null, function (response) {
+                MedicineUpdateWindow.open();
+                MedicineUpdateWindow.center();
+                MedicineUpdateWindow.content(response);
+
+            });
+
+        }
+        function deleteMedicine(e, element) {
+            e.preventDefault();
+            if (window.confirm("are you sure you want to permanently remove BreedMedicine ?")) {
+
+                $.ajax({
+                    type: "POST",
+                    url: element.action,
+                    data: null,
+                    success: function (data, statusCode, xhr) {
+                        if (data === 1) {
+                            Medicinegrid.dataSource.read();
+                            updateBillingDetail();
+                        }
+                    },
+                    error: function (xhr, errorType, exception) { //Triggered if an error communicating with server
+                        var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText
+                        alert(xhr.statusText);
+                    }
+
+
+                });
+            };
+        }
+
+
+        $(function () {
+            MedicineUpdateWindow = $('#window-update-Medicine').data('kendoWindow');
+            Medicinegrid = $('#grid ').data('kendoGrid');
+            $('#add-medicine').click(function (e) {
+
+                $.get($(this).attr('href'), null, function (response) {
+                    MedicineUpdateWindow.content(response);
+                    MedicineUpdateWindow.open();
+                    MedicineUpdateWindow.center();
+                });
+                e.preventDefault();
+            });
+
+            $('body').on('submit', '#form-add-Medicine', function (e) {
+                e.preventDefault();
+
+                $.post($(this).attr('action'), $(this).serialize(), function (response) {
+                    if (response == 1) {
+                        MedicineUpdateWindow.close();
+                        Medicinegrid.dataSource.read();
+                    } else {
+                        MedicineUpdateWindow.content(response);
+
+                    }
+
+                });
+
+
+            });
+
+       })
+
+
+
+
+    </script>
+}

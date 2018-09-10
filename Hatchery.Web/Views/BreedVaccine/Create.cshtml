@@ -1,0 +1,63 @@
+﻿@model Nepaltech.Models.Forms.BreedVaccineModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-breedvaccine">
+    
+    @Html.HiddenFor(m => m.BreedId)
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedID">Breed Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">@Html.DisplayFor(m => m.Breed)</div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="VaccineId">Select Vaccine</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            <div>
+
+               @(Html.Kendo().DropDownList()
+              .Name("VaccineId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Vaccine...")
+              .DataTextField("VaccineName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeVaccines", "BreedVaccine");
+                  });
+              })
+               )
+            </div>
+            @Html.ValidationMessageFor(model => model.VaccineId, "", new { @class = "text-danger" })
+          @*  <%=Html.DropDownListFor(m => m.VaccineId, new SelectList((ViewBag.Create) as SelectList, "Value", "Text"), "Select")%>*@
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="Age">Age</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            <div>
+                @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
+                @Html.Kendo().TextBoxFor(m => m.Age)
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @*@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })*@
+    </div>
+</form>
+
+   
+@*<script>
+  $("#optionId").on("change", function () {
+    if ($("#optionId option:selected").index() == 0) {
+      $("#controlId").hide();
+    } else {
+      $("#controlId").show();
+    }
+  });
+</script>*@

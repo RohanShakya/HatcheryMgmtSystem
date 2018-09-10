@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Farms </h2>
+
+<div>
+    @*@Html.ActionLink("Add new Record", "Create", null, new { @class = "btn btn-primary", id = "add-farms" })*@
+    <a href="@Url.Action("Create","Farms")" class="k-button k-button-icontext" id = "add-farms" style="margin: 2px;"> <span class="k-icon k-i-add"></span> Add new record</a>
+</div>
+@*@(Html.Kendo().DatePicker()
+          .Name("datepicker")
+
+    )*@
+
+<div id="example">
+    @(Html.Kendo().Grid<Nepaltech.Entities.HatcheryFarm>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Name).ClientTemplate("<a href='/Farms/Details/#=Id#'>#=Name#</a>");
+    columns.Template(@<text>option</text>).ClientTemplate(
+                                                               "<a onclick=\"updateFarms(event,this)\" href=\"/farms/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"removeFarms(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Farms/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
+                                                               "</form>"
+                          );
+        
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetFarms", "Farms"))
+        .Sort(x=>x.Add("Name").Descending())
+     )
+    )
+</div>
+
+
+@(Html.Kendo().Window()
+.Name("window-update-farms")
+.Title("Update Farms")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+
+
+)
+
+
+@section scripts{
+    <script type="text/javascript">
+        var chargetypeUpdateWindow;
+        var farmsgrid;
+
+        function updateFarms(e, link) {
+            e.preventDefault();
+            $.get(link.href, null, function (response) {
+                chargetypeUpdateWindow.open();
+                chargetypeUpdateWindow.center();
+                chargetypeUpdateWindow.content(response);
+
+            });
+
+        }
+        function removeFarms(e, element) {
+            e.preventDefault();
+            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+
+                $.ajax({
+                    type: "POST",
+                    url: element.action,
+                    data: null,
+                    success: function (data, statusCode, xhr) {
+                        if (data === 1) {
+                            farmsgrid.dataSource.read();
+                            updateBillingDetail();
+                        }
+                    },
+                    error: function (xhr, errorType, exception) { //Triggered if an error communicating with server
+                        var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText
+                        alert(xhr.statusText);
+                    }
+
+                });
+
+            };
+        }
+
+
+        $(function () {
+            chargetypeUpdateWindow = $('#window-update-farms').data('kendoWindow');
+            farmsgrid = $('#grid ').data('kendoGrid');
+            $('#add-farms').click(function (e) {
+
+                $.get($(this).attr('href'), null, function (response) {
+                    chargetypeUpdateWindow.content(response);
+                    chargetypeUpdateWindow.open();
+                    chargetypeUpdateWindow.center();
+                });
+                e.preventDefault();
+            });
+
+            $('body').on('submit', '#form-add-farms', function (e) {
+                e.preventDefault();
+
+                $.post($(this).attr('action'), $(this).serialize(), function (response) {
+                    if (response == 1) {
+                        chargetypeUpdateWindow.close();
+                        farmsgrid.dataSource.read();
+                    } else {
+                        chargetypeUpdateWindow.content(response);
+
+                    }
+
+                });
+
+            });
+
+       })
+    </script>
+
+}
+
+@*<style>
+    .k-grid td {
+        border-width: 0 0 0 0;
+        height: 50px;
+    }
+
+    #example {
+        font-size: 14px;
+        font-family: Arial;
+    }
+
+    .k-grid-header {
+        background-color: white;
+    }
+
+    .k-button {
+        /*border: none;*/
+        border-color: #fafafa;
+        background-color: #fafafa;
+        text-transform: uppercase;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+    }
+
+    .k-button:hover {
+        background-color: #3674d8;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+</style>*@

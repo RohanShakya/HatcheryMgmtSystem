@@ -1,0 +1,297 @@
+﻿@using Nepaltech.Models.ApiModels;
+@model Nepaltech.Models.Forms.AddChickenInFarmModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Add Chicken In Farms</h2>
+
+<div>
+
+    @*@Html.ActionLink("ADD NEW RECORD", "Create", null , new { @class = "btn btn-primary", id = "btn-add-batchchicken" })*@
+    <a href="/AddChicken/Create" class="k-button k-button-icontext" id = "btn-add-batchchicken" style="margin: 2px;"><span class="k-icon k-i-add"></span>Add new Record</a>
+</div>
+@*@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+
+)*@
+
+<div id="example">
+  @(Html.Kendo().Grid<BatchChickenDataModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.Id).Hidden();
+    //columns.Bound(p => p.Name).ClientTemplate("<a href='/AddChicken/Details/#=id#'>#=Name#</a>");
+    columns.Bound(p => p.BatchCode).Width(130);
+    columns.Bound(p => p.FarmName).Width(180);
+    columns.Bound(p => p.BuildingName).Width(120);
+    columns.Bound(p => p.Location).ClientTemplate("<a href='/AddChicken/Details/#=Id#'>#=Location#</a>").Width(120);
+    //columns.Bound(p => p.Breed);
+    //columns.Bound(p => p.Country);
+    //columns.Bound(p => p.ArrivalDate);
+    columns.Bound(p => p.TotalMale).Width(120);
+    columns.Bound(p => p.TotalFemale).Width(120);
+    columns.Template(@<text>option</text>).ClientTemplate(
+                                                               "<a onclick=\"updateBatchChicken(event,this)\" href=\"/AddChicken/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"removeBatchChicken(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/AddChicken/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
+                                                               "</form>"+
+                                                               "<a onclick=\"shiftBatchChicken(event,this)\" href=\"/AddChicken/shift/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-redo\"></span>Shift</a>"
+                          );
+
+    })
+
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetAllFarms", "AddChicken"))
+        .Sort(x => x.Add("BatchCode").Ascending())
+     )
+)
+</div>
+
+
+@(Html.Kendo().Window()
+.Name("window-update-batchchicken")
+.Title("Update BatchChicken")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+
+)
+
+
+@section scripts{
+    <script type="text/javascript">
+        var chargetypeUpdateWindow;
+        var batchchickengrid;
+
+        function updateBatchChicken(e, link) {
+            e.preventDefault();
+            $.get(link.href, null, function (response) {
+                chargetypeUpdateWindow.open();
+                chargetypeUpdateWindow.center();
+                chargetypeUpdateWindow.content(response);
+
+            });
+
+        }
+
+        function shiftBatchChicken(e, link) {
+            e.preventDefault();
+            $.get(link.href, null, function (response) {
+                chargetypeUpdateWindow.open();
+                chargetypeUpdateWindow.center();
+                chargetypeUpdateWindow.content(response);
+
+            });
+
+        }
+
+        function removeBatchChicken(e, element) {
+            e.preventDefault();
+            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+
+                $.ajax({
+                    type: "POST",
+                    url: element.action,
+                    data: null,
+                    success: function (data, statusCode, xhr) {
+                        if (data === 1) {
+                            batchchickengrid.dataSource.read();
+                            updateBillingDetail();
+                        }
+                    },
+                    error: function (xhr, errorType, exception) { //Triggered if an error communicating with server
+                        var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText
+                        alert(xhr.statusText);
+                    }
+
+                });
+
+            };
+        }
+
+
+        $(function () {
+            chargetypeUpdateWindow = $('#window-update-batchchicken').data('kendoWindow');
+            batchchickengrid = $('#grid').data('kendoGrid');
+            $('#btn-add-batchchicken').click(function (e) {
+
+                $.get($(this).attr('href'), null, function (response) {
+                    chargetypeUpdateWindow.content(response);
+                    chargetypeUpdateWindow.open();
+                    chargetypeUpdateWindow.center();
+                });
+                e.preventDefault();
+            });
+
+            $('body').on('submit', '#form-add-batchchicken', function (e) {
+                e.preventDefault();
+
+                $.post($(this).attr('action'), $(this).serialize(), function (response) {
+                    if (response == 1) {
+                        chargetypeUpdateWindow.close();
+                        batchchickengrid.dataSource.read();
+                    } else {
+                        chargetypeUpdateWindow.content(response);
+
+                    }
+
+                });
+
+            });
+
+       })
+    </script>
+<script type="text/javascript">
+    function filterProducts() {
+                return {
+                    FarmId: $("#FarmId").val()
+                };
+    }
+
+    function filterProduct() {
+        return {
+            BuildingId: $("#BuildingId").val()
+        };
+    }
+</script>
+
+}
+
+<style>
+    .k-grid td{
+        border-width: 0 0 0 0;
+        height: 50px;
+    }
+
+    #example{
+        font-size: 14px;
+        font-family: Arial;
+    }
+
+    .k-grid-header{
+        background-color: white;
+    }
+
+    .k-button{
+        /*border: none;*/
+        border-color: #fafafa;
+        background-color: #fafafa;
+        text-transform: uppercase;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+    }
+    .k-button:hover {
+        background-color:#3674d8;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .k-grid-header th.k-header>.k-link{
+        color:#ffffff;
+        border-width: 0 0 0 0;
+    }
+
+    .k-grid-header .k-header{
+        background-color: #3c8dbc;
+    }
+
+    .k-grid-header th.k-header{
+        border-width: 0 0 0 0;
+    }
+
+    .k-header{
+        background-color:#cde4e3;
+    }
+
+</style>
+
+
+@*<div class="container">
+    <div class="row">
+
+        @(Html.Kendo().Grid<Hatchery.Web.Models.ViewModel.AddChickenInFarmModel>()
+@(Html.Kendo().Grid<Nepaltech.Entities.HatcheryFarm>()
+    .Name("UserGrid")
+    .Selectable()
+    .Columns(columns =>
+    {
+        //columns.Bound(c => c.Id);
+        columns.Bound(c => c.Name)
+              .Width(240);
+        columns.Bound(c => c.Address);
+        columns.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        }).Width(200);
+
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(model =>
+        {
+            model.Id(u => u.Id);
+            model.Field(u => u.Id).Editable(false);
+        }
+        )
+        .Read(read => read.Action("GetAllFarms", "AddChicken"))
+      .Update(update => update.Action("UpdateUser", "GridCRUD"))
+      .Create(create => create.Action("AddUser", "GridCRUD"))
+      .Destroy(destroy => destroy.Action("DeleteUser", "GridCRUD"))
+
+        )
+   .ToolBar(toolbar => toolbar.Create())
+
+   // Set grid editable.
+   .Editable(editable => editable.Mode(GridEditMode.InLine))
+
+    // Set grid sortable.
+    .Sortable()
+
+    // Set grid selectable.
+    .Selectable()
+    .Filterable()
+    .Groupable()
+
+    // Set grid pagable.
+    .Pageable(pageable =>
+    {
+        pageable.Refresh(true);
+        pageable.PageSizes(true);
+    })
+)
+    </div>
+</div>*@
+
+@*<style>
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>*@

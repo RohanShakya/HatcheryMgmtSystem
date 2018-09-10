@@ -1,0 +1,101 @@
+﻿@model Nepaltech.Models.Forms.ChickenFeedModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<h2>Edit</h2>
+
+@Html.HiddenFor(model => model.Id)
+
+<form action="@(Url.Action("Edit"))" method="post" class="nt-form" id="form-add-chickenfeeds">
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchId, new { @name = "BatchChickenId" }) </div> </div>
+        </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.FarmName) </div> </div>
+        </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="location">Location</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Location) </div> </div>
+        </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div>@Html.DisplayFor(m => m.Breed)</div> </div>
+        <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="vaccine">Select Feed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3">
+            @(Html.Kendo().DropDownList()
+              .Name("FeedId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Feeds...")
+              .DataTextField("FeedName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreedFeed", "ChickenFeeds", new { breeds = Model.BreedId });
+                  });
+              })
+            )
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <label class="control-label" for="age">Age</label> </div>
+        <div class="col-md-offset-0 col-md-3">
+            <div class="col-10">
+                @Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div> <label class="control-label" for="DateEntry">DateEntry</label> </div>
+
+
+            @*@Html.EditorFor(m=>m.VaccinationDate, new { htmlAttributes = new { @class = "form-control" } })*@
+            @(Html.Kendo().DatePicker()
+                  .Name("DateEntry")
+                  .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+            )
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ActualQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ActualQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ActualQuantity, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group">
+                    <div class=" col-md-offset-6 col-md-2"> <div> <label class="control-label" for="gender">Gender</label> </div> </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="GenderId" name="GenderId">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.DateCreated)
+
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    @Html.ActionLink("Cancel", "Details", "AddChicken", new { @id = Model.BatchChickenId }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@*<script>
+    function filterProducts() {
+        return {
+            //breeds: $("#breedId").html()
+            breeds: "@Model.BreedId"
+        };
+    }
+</script>*@

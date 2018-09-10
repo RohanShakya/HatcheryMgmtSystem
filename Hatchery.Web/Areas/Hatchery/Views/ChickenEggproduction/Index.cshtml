@@ -1,0 +1,37 @@
+﻿@using Nepaltech.Models.Forms
+@model Nepaltech.Models.Forms.ChickenEggProductionModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="example">
+    @(Html.Kendo().Grid<ChickenEggProductionModel>()
+    .Name("Egg")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Id).Hidden();
+        columns.Bound(p => p.BatchId).ClientTemplate("<a href='/ChickenEggproduction/Details/#=Id#'>#=BatchId#</a>");
+        columns.Bound(p => p.AgeinWeeks);
+        columns.Bound(p => p.BatchChickenId).Hidden();
+        columns.Bound(p => p.TotalEggs);
+        columns.Bound(p => p.GoodEggs);
+        columns.Bound(p => p.SpoiltEggs);
+        columns.Bound(p => p.DateCreated).Hidden();
+
+
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetChickenEggProduction", "ChickenEggproduction"))
+     )
+    )
+</div>
+
+

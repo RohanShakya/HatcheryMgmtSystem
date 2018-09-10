@@ -1,0 +1,23 @@
+﻿@model Nepaltech.Entities.Breed
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@{
+    Html.RenderPartial("Forms/Breeds/_Details");
+}
+
+
+
+
+@section scripts{
+<script src="~/Scripts/app/Breed/detail-breedvaccine.js"></script>
+<script src="~/Scripts/app/Breed/detail-breedmortality.js"></script>
+<script src="~/Scripts/app/Breed/details-breedeggproduction.js"></script>
+@*<script src="~/Scripts/app/Breed/details-chickenmortality.js"></script>*@
+<script src="~/Scripts/app/Breed/detail-breedfeeds.js"></script>
+<script src="~/Scripts/app/Breed/details-breedweight.js"></script>
+}
+

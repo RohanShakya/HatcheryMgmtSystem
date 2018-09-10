@@ -1,0 +1,24 @@
+﻿/*theme 1*/
+/*button colors*/
+/*button colors*/
+/*theme 1*/
+/*theme 2*/
+/*theme 2*/
+/*theme color 3*/
+/*theme color 3*/
+/*topmenu*/
+nav.navbar-default {
+  border: none;
+  background: #0078D7; }
+  nav.navbar-default .navbar-header a {
+    color: white; }
+    nav.navbar-default .navbar-header a:hover {
+      color: white; }
+  nav.navbar-default .navbar-collapse ul li a {
+    color: white; }
+    nav.navbar-default .navbar-collapse ul li a:hover, nav.navbar-default .navbar-collapse ul li a:focus {
+      background: rgba(0, 0, 0, 0.1);
+      color: white; }
+
+/*top menu*/
+

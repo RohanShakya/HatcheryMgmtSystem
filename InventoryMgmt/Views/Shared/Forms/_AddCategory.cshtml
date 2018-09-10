@@ -1,0 +1,11 @@
+﻿@model InventoryMgmt.Models.CategoryAddModel
+@{
+    ViewBag.Title = "_AddCategory";
+}
+
+<form method="get">
+code:@Html.TextBoxFor(m => m.Code)<br /><br />
+   Name: @Html.TextBoxFor(m=>m.Name)<br /><br />
+    Description:@Html.TextBoxFor(m=>m.Description)
+</form>
+

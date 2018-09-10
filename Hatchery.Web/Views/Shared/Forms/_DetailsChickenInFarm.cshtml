@@ -1,0 +1,95 @@
+﻿@model Nepaltech.Entities.AddChickenInFarm
+
+
+@{
+    ViewBag.Title = "_DetailsChickenInFarm";
+}
+
+@*<h2>_DetailsChickenInFarm</h2>*@
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchId)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Batch Code")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Batch.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Farm.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Farm.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Breed")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Batch.Breed.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Batch.Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Batch.Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Batch.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Batch.ArrivalDate)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalMale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalMale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalFemale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalFemale)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>
+
+
+

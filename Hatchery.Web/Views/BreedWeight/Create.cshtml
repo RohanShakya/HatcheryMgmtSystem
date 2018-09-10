@@ -1,0 +1,67 @@
+﻿@model Nepaltech.Models.Forms.BreedWeightModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h2>Create</h2>
+
+
+<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-breedweight">
+    @Html.HiddenFor(m => m.BreedId)
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedID">Breed Name</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">@Html.DisplayFor(m => m.BreedName)</div>
+    </div>
+
+    <div class=" row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="FeedId">Select BreedType</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            <div>
+
+                @(Html.Kendo().DropDownList()
+              .Name("BreedTypeId")
+              .HtmlAttributes(new { style = "width:150%" })
+              .OptionLabel("Select BreedType...")
+              .DataTextField("BreedTypeName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreedType", "BreedWeight", new { breeds = Model.BreedId });
+                  });
+              })
+                )
+            </div>
+            @Html.ValidationMessageFor(model => model.BreedTypeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="Age"> Age </label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            @Html.Kendo().TextBoxFor(m => m.Age)
+            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="Weight"> Weight </label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            @Html.Kendo().TextBoxFor(m => m.Weight)
+            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+
+        @*@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })*@
+    </div>
+
+</form>
+
+<script>
+
+</script>

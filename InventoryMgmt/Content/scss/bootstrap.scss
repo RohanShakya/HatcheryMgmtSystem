@@ -1,0 +1,32 @@
+﻿@import "_theme_color.scss";
+
+/*topmenu*/
+nav.navbar-default {
+    border: none;
+    background: $themeColor;
+
+    .navbar-header {
+        a {
+            color: white;
+            &:hover{
+                color:white;
+            }
+        }
+    }
+
+    .navbar-collapse {
+        ul {
+            li {
+                a {
+                    color: white;
+                    &:hover,&:focus{
+                        background:rgba(0,0,0,0.1);
+                        color:white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*top menu*/

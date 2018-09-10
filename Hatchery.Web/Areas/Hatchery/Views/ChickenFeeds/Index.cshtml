@@ -1,0 +1,48 @@
+﻿@using Nepaltech.Models.Forms
+@model Nepaltech.Models.Forms.ChickenFeedModel
+@{
+    ViewBag.Title = "Index";
+}
+<div id="example">
+    @(Html.Kendo().Grid<ChickenFeedModel>()
+    .Name("ChickenFeedGrid")
+    .Columns(columns =>
+    {
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.BatchId).ClientTemplate("<a href='/ChickenFeeds/Details/#=Id#'>#=BatchId#</a>");
+    columns.Bound(p => p.Feed);
+    columns.Bound(p => p.BreedName);
+    columns.Bound(p => p.DateEntry);
+    columns.Bound(p => p.GenderId);
+    columns.Bound(p => p.BatchChickenId).Hidden();
+    columns.Bound(p => p.ActualQuantity).ClientTemplate("#=ActualQuantity#" + " grams");
+    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatechickenfeeds(event,this)\" href=\"/ChickenFeeds/edit/#: Id#?batchChickenId=#: BatchChickenId#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletechickenfeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenFeeds/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "</form>"
+
+                          );
+
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    //.Filterable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("GetChickenFeed", "ChickenFeeds"))
+     )
+    )
+</div>
+
+@(Html.Kendo().Window()
+.Name("window-update-chickenfeeds")
+.Title("Update chickenfeeds")
+//.HtmlAttributes(new{@class="col-md-10"})
+//.Width(500)
+//.Height(500)
+.Modal(true)
+.Visible(false)
+.Draggable(true)
+)

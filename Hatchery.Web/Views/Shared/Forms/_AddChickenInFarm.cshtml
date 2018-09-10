@@ -1,0 +1,131 @@
+﻿@model Nepaltech.Models.Forms.AddChickenInFarmModel
+
+<form action="@(Url.Action("Create"))" method="post" class="nt-form col-md-11" id="form-add-batchchicken">
+    <div class="row">
+        <div class="col-md-3"> <div> <label class="control-label" for="BatchId"> Batch Code </label> </div> </div>
+        <div class="col-md-6">
+            @*<div class="col-md-10"> @Html.TextBoxFor(m => m.BatchId, new { @class = "form-control" })</div>*@
+            @(Html.Kendo().DropDownList()
+              .Name("BatchId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Batch...")
+              .DataTextField("BatchCode").Template("#=BatchCode# - #=RoomsCount# Rooms")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBatch", "AddChicken");
+                  });
+              })
+            )
+            @Html.ValidationMessageFor(model => model.BatchId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3"> <div> <label class="control-label" for="FarmId">Farm</label> </div> </div>
+        <div class="col-md-6">
+            @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+           
+                @*@Html.DropDownList("farmId", null, new { @class = "form-control" })*@
+                @(Html.Kendo().DropDownList()
+              .Name("FarmId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select farm...")
+              .DataTextField("FarmName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeFarms", "AddChicken");
+                  });
+              })
+                )
+                @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BuildingId">Building</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            @(Html.Kendo().DropDownList()
+            .Name("BuildingId")
+            .HtmlAttributes(new { style = "width:100%" })
+            .OptionLabel("Select Building...")
+            .DataTextField("BuildingName")
+            .DataValueField("Id")
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetCascadeBuilding", "AddChicken")
+                        .Data("filterProducts");
+                })
+                .ServerFiltering(true);
+            })
+            .Enable(false)
+            .AutoBind(false)
+            .CascadeFrom("FarmId")
+            )
+            @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
+            @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId">Room</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+            @(Html.Kendo().DropDownList()
+              .Name("LocationId")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select Room...")
+              .DataTextField("LocationName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeLocations", "AddChicken")
+                          .Data("filterProduct");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("BuildingId")
+            )
+            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+           
+
+              @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+            
+        </div>
+        </div>
+    <br />
+    <div class="row">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalMale">Total Male</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
+                @*@Html.TextBoxFor(m => m.TotalMale, new { @class = "form-control" })*@
+                @Html.Kendo().TextBoxFor(m => m.TotalMale)
+                @Html.ValidationMessageFor(model => model.TotalMale, "", new { @class = "text-danger" })
+        </div>
+        </div>
+    <br />
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalFemale">Total Female</label> </div> </div>
+
+            <div class="col-md-offset-0 col-md-6">
+                    @Html.Kendo().TextBoxFor(m => m.TotalFemale)
+                    @Html.ValidationMessageFor(model => model.TotalFemale, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-default" />
+        @*@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })*@
+    </div>
+</form>
+

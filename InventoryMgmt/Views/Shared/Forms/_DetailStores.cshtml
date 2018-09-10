@@ -1,0 +1,38 @@
+﻿@model InventoryMgmt.Models.AddStoresModel
+@{
+    ViewBag.Title = "_DetailStores";
+    var id = (string)ViewBag.StoreId;
+}
+
+@*<h2>_DetailStores</h2>*@
+
+<div>
+    @Html.ActionLink("Update", "Edit" + "/"+ id, null, new { @class = "btn btn-primary", @id = "update" })
+
+    
+    @Html.ActionLink("Home", "Index", null, new { @class = "btn btn-info" })
+
+    <form action="@Url.Action("Delete", "Stores", new {id= (string)ViewBag.StoreId })" method="post">
+        <input type="submit"` value="Delete" class="btn btn-danger"  />
+    </form>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2"> @Html.LabelFor(m=>m.Code)  </div>
+    <div id="storecode" class="col-md-10"> Code </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"> <label> Store Name</label> </div>
+    <div id="data-storename" class="col-md-10"> Name </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        confirm('Are you sure you want to delete this item?');
+        
+    }
+</script>
+
+

@@ -1,0 +1,76 @@
+﻿@model Nepaltech.Models.Forms.BreedMortalityModel
+
+<form action="@(Url.Action("Edit"))" method="post" class="nt-form" id="form-add-breedmortality">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BreedMortalityModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @*<div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedId">Select Breed </label> </div> </div>
+            <div class="col-md-offset-0 col-md-3">
+                @*<select class="form-control" id="inlineFormCustomSelect"> <option selected>Drop down...</option> <option value="1">One</option> <option value="2">Two</option> <option value="3">Three</option> </select>*@
+        @*<div class="col-md-10"> @Html.DropDownList("BreedId", null, new { @class = "form-control" })</div>
+            </div>*@
+        @Html.HiddenFor(m => m.BreedId)
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BreedID">Breed Name</label> </div> </div>
+            <div class="col-md-offset-0 col-md-3">@Html.DisplayFor(m => m.Breed)</div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> @Html.LabelFor(m=>m.BreedTypeId, "Breed Type") </div> </div>
+            <div class="col-md-offset-0 col-md-3">
+                <div>
+
+                    @(Html.Kendo().DropDownList()
+              .Name("BreedTypeId")
+              .HtmlAttributes(new { style = "width:150%" })
+              .OptionLabel("Select BreedType...")
+              .DataTextField("BreedTypeName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeBreedType", "BreedMortality", new { breeds = Model.BreedId });
+                  });
+              })
+                    )
+                </div>
+                @Html.ValidationMessageFor(model => model.BreedTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            @Html.LabelFor(model => model.MortalityPercentage, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(m=>m.MortalityPercentage)
+                @Html.ValidationMessageFor(model => model.MortalityPercentage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3"> @Html.LabelFor(model => model.AgeinWeeks) </div>
+            <div class="col-md-3">
+                @Html.Kendo().TextBoxFor(m=>m.AgeinWeeks)
+                @Html.ValidationMessageFor(model => model.AgeinWeeks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.BreedId)
+        @Html.HiddenFor(model => model.DateCreated)
+    </div>
+</form>

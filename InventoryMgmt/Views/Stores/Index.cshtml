@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.ActionLink("Add new Record","Create", null, new { @class = "btn btn-primary" })
+</div>
+<div id="example">
+    @*@(Html.Kendo().DatePicker()
+              .Name("datepicker")
+    )*@
+    <div id="grid"></div>
+
+    <script type="text/javascript">
+       
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "http://stores.merodoko.com/api/stores",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: crudServiceBaseUrl,
+                            dataType: "json"
+                        },
+                        //create: {
+                        //    url: crudServiceBaseUrl,
+                        //    dataType: "json",
+                        //    contentType: "application/json",
+                        //    type: "POST"
+                        //},
+                        parameterMap: function (options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return { models: kendo.stringify(options.models) };
+                            }
+                        }
+
+                    },
+                    batch: true,
+                    pageSize: 20,
+                    schema: {
+                        model: {
+                            id: "id",
+                            fields: {
+                                code: { type: "string" },
+                                displayName: { type: "string" },
+                                seoName: { type: "string" },
+                                dateInactive: { type: "date" },
+                                purchaseOrderPrintId: { type: "string" }
+                            }
+                        }
+                    }
+                });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                selectable: "row",
+                //change: onChange,
+                pageable: true,
+                height: 550,
+                columns: [
+                    { field: "code", title: "Code", width: "120px", template: '<a href="/Stores/Details/#=id#">#=code#</a>' },
+                    { field: "displayName", title: "Store Name", width: "120px" }]
+            });
+
+        });
+
+        //function onChange(e) {
+        //    var rows = e.sender.select();
+        //    rows.each(function (e) {
+        //        var grid = $("#grid").data("kendoGrid");
+        //        var dataItem = grid.dataItem(this);
+        //        var id = dataItem.id;
+        //        console.log(dataItem);
+        //        window.location.href = 'http://localhost:48934/Stores/details/' + id;
+               
+        //    })
+        //};
+
+    </script>
+</div>
+
+
+<style>
+    .k-grid-header th.k-header{
+        font-weight: 700;
+    }
+</style>
+  

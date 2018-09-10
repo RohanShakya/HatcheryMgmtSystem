@@ -1,0 +1,52 @@
+﻿@model InventoryMgmt.Models.AddStoresModel
+@{
+    ViewBag.Title = "_EditStoresPopup";
+    //var id = (string)ViewBag.StoreId;
+}
+
+@*<h2>_EditStoresPopup</h2>*@
+
+<div id="window">
+    <form method="post" action="@Url.Action("Edit", "StoresPopup", new { id = (string)ViewBag.StoreId })">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Code)
+            @Html.TextBoxFor(m => m.Code)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.StoreName)
+            @Html.TextBoxFor(m => m.StoreName)
+        </div>
+
+        <p><input type="submit" value="Update" class="btn btn-default" /></p>
+
+    </form>
+</div>
+<button class="btn btn-primary" id="btnCreate"> Add new Store</button>
+
+<div id="grid"></div>
+
+<script>
+                $(document).ready(function() {
+                    var myWindow = $("#window"),
+                        btnCreate = $("#btnCreate");
+
+                    btnCreate.click(function () {
+                        myWindow.data("kendoWindow").open();
+                    });
+
+                    function onClose() {
+                        myWindow.fadeIn();
+                    }
+
+                    myWindow.kendoWindow({
+                        width: "400px",
+                        title: "Add new category",
+                        visible: false,
+                        actions: [
+                            "Close"
+                        ],
+                        close: onClose
+                    }).data("kendoWindow").center();
+                });
+</script>

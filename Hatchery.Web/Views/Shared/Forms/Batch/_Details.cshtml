@@ -1,0 +1,133 @@
+﻿@model Nepaltech.Entities.Batch
+
+
+@{
+    ViewBag.Title = "_Details";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Breed")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Breed.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalMale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalMale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalFemale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalFemale)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+</p>*@
+
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#chickenVaccine" aria-controls="chickenVaccine" role="tab" data-toggle="tab">Chicken Vaccine</a></li>
+        <li role="presentation"><a href="#chickenFeeds" aria-controls="chickenFeeds" role="tab" data-toggle="tab"> Chicken Feeds</a></li>
+        <li role="presentation"><a href="#chickenMortality" aria-controls="chickenMortality" role="tab" data-toggle="tab">ChickenMortality</a></li>
+        <li role="presentation"><a href="#chickenEggProduction" aria-controls="chickenEggProduction" role="tab" data-toggle="tab">Chicken Eggs Production</a></li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="chickenVaccine">
+            <div>
+                
+                @*<a href="@(Url.Action("Create","ChickenVaccine", new { id = Model.Id }))" class="btn btn-primary" id="btn-add-chickenvaccine">Add Chicken Vaccine</a>*@
+                <a href="@(Url.Action("Create","ChickenVaccine", new { id = Model.Id }))" class="btn btn-primary breed">Add Chicken Vaccine</a>
+            </div>
+            @{
+                Html.RenderPartial("~/Views/ChickenVaccine/Index.cshtml", Model.Id);
+            }
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="chickenFeeds">
+            <div>
+
+                <a href="@(Url.Action("Create","ChickenFeeds", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-chickenfeeds">Add Chicken Feeds</a>
+            </div>
+            @{
+                //Html.RenderPartial("~/Views/ChickenFeeds/Index.cshtml", new Nepaltech.Models.Forms.ChickenFeedModel());
+               Html.RenderPartial("~/Views/ChickenFeeds/Index.cshtml", Model.Id);
+            }
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="chickenMortality">
+            <div>
+
+                <a href="@(Url.Action("Create","ChickenMortality", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-chickenmortality">Add ChickenMortality</a>
+            </div>
+            @{
+                Html.RenderPartial("~/Views/ChickenMortality/Index.cshtml" ,Model.Id);
+            }
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="chickenEggProduction">
+            <div>
+
+                <a href="@(Url.Action("Create","ChickenEggproduction", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-chickeneggproduction">Add ChickenEggproduction</a>
+            </div>
+            @{
+                Html.RenderPartial("~/Views/ChickenEggproduction/Index.cshtml", Model.Id);
+            }
+        </div>
+        </div>
+
+    </div>
+    
+
+

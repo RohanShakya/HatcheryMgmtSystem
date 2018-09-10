@@ -1,0 +1,30 @@
+﻿@model InventoryMgmt.Models.CategoryTypeViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+@{
+
+    Html.RenderPartial("Forms/_AddCategoryType", Model);
+
+}
+<script>
+ $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: true,
+                height: 550,
+                toolbar: ["create"],
+                columns: [
+                    { field: "id", title: "Id", format: "{0:c}", width: "300px" },
+                  {field:"name",title:"Name",width:"300px"},
+
+
+                    { field: "description", title: "Description", width: "300px" },
+
+                            { command: ["edit", "destroy"], title: "&nbsp;", width: "300px" }],
+                        editable: "popup"
+                    });
+  
+    </script>
+
+

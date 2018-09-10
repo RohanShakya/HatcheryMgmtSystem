@@ -1,0 +1,22 @@
+﻿[
+  {
+    "outputFile": "Content/scss/topmenu.css",
+    "inputFile": "Content/scss/topmenu.scss"
+  },
+  {
+    "outputFile": "Content/scss/side_menu.css",
+    "inputFile": "Content/scss/side_menu.scss"
+  },
+  {
+    "outputFile": "Content/scss/master.css",
+    "inputFile": "Content/scss/master.scss"
+  },
+  {
+    "outputFile": "Content/scss/footer.css",
+    "inputFile": "Content/scss/footer.scss"
+  },
+  {
+    "outputFile": "Content/scss/bootstrap.css",
+    "inputFile": "Content/scss/bootstrap.scss"
+  }
+]

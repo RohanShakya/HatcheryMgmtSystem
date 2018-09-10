@@ -1,0 +1,15 @@
+﻿@model InventoryMgmt.Models.AddStoresModel
+@{
+    ViewBag.Title = "Edit";
+    var id = (string)ViewBag.StoreId;
+}
+
+<h2>Edit</h2>
+
+@{ 
+    Html.RenderPartial("Forms/_EditStores", Model);
+}
+
+
+
+

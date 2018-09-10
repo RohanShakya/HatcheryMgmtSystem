@@ -1,0 +1,61 @@
+﻿body {
+    /*padding-top: 50px;*/
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.skin-blue .main-header .navbar {
+    background-color: #404446;
+}
+
+.breed{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.k-grid td{
+    border-width: 0 0 0 0;
+    height: 50px;
+}
+
+#example{
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.k-grid-header{
+    background-color: white;
+}
+
+.k-button{
+    /*border: none;*/
+    border-color: #fafafa;
+    background-color: #fafafa;
+    text-transform: uppercase;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+}
+.k-button:hover {
+    background-color:#3674d8;
+    color: #fff;
+    transform: translateY(-2px);
+}
