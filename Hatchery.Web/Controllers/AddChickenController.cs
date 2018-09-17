@@ -102,9 +102,18 @@ namespace Hatchery.Web.Controllers
                 {
                     var a = farmservice.AddChickenToFarm(model);
 
-                    if (a == 0)
+                    if (a == 3) {
+                        ModelState.AddModelError("TotalMale", "Invalid number of male chicken in the batch.");
+                        ModelState.AddModelError("TotalFemale", "Invalid number of female chicken in the batch.");
+                        return PartialView();
+                    }
+                    else if (a == 1)
                     {
-                        ModelState.AddModelError("BatchId", "Invalid number of chicken in the batch.");
+                        ModelState.AddModelError("TotalMale", "Invalid number of male chicken in the batch.");
+                        return PartialView();
+                    }else if (a == 2)
+                    {
+                        ModelState.AddModelError("TotalFemale", "Invalid number of female chicken in the batch.");
                         return PartialView();
                     }
                     return Json(1, JsonRequestBehavior.AllowGet);
@@ -155,7 +164,22 @@ namespace Hatchery.Web.Controllers
                     ModelState.AddModelError("LocationId", "You have already added chicken to this room");
                     return PartialView(model);
                 }
-                farmservice.EditChickenInFarm(model);
+                var a = farmservice.EditChickenInFarm(model);
+                if (a == 3)
+                {
+                    ModelState.AddModelError("TotalMale", "Invalid number of male chicken in the batch.");
+                    ModelState.AddModelError("TotalFemale", "Invalid number of female chicken in the batch.");
+                    return PartialView(model);
+                }else if (a == 1)
+                {
+                    ModelState.AddModelError("TotalMale", "Invalid number of male chicken in the batch.");
+                    return PartialView(model);
+                }
+                else if (a == 2)
+                {
+                    ModelState.AddModelError("TotalFemale", "Invalid number of female chicken in the batch.");
+                    return PartialView(model);
+                }
                 return Json(1, JsonRequestBehavior.AllowGet);
                 
                 //return RedirectToAction("Index");
@@ -195,6 +219,22 @@ namespace Hatchery.Web.Controllers
                 {
                     ModelState.AddModelError("LocationId", "You have already added chicken to this room");
                     //model.BatchCode = 
+                    return PartialView(model);
+                }
+                if (model.TotalMale > model.PreviousMale && model.TotalFemale > model.PreviousFemale)
+                {
+                    ModelState.AddModelError("TotalMale", "Invalid number of male chicken.");
+                    ModelState.AddModelError("TotalFemale", "Invalid number of female chicken.");
+                    return PartialView(model);
+                }
+                if (model.TotalMale > model.PreviousMale)
+                {
+                    ModelState.AddModelError("TotalMale", "Invalid number of male chicken.");
+                    return PartialView(model);
+                }
+                if (model.TotalFemale > model.PreviousFemale)
+                {
+                    ModelState.AddModelError("TotalFemale", "Invalid number of female chicken.");
                     return PartialView(model);
                 }
                 farmservice.ShiftChickenToFarm(model);

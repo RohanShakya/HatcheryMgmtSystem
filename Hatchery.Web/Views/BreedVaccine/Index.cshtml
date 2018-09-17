@@ -3,7 +3,7 @@
 }
 @model string
 
-
+<div id="breedvaccinegrid">
     @(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedVaccineModel>()
     .Name("Breedvaccinegrid")
     .Columns(columns =>
@@ -13,13 +13,12 @@
     columns.Bound(p => p.Age).ClientTemplate("#=Age#" + " days");
     //columns.Bound(p => p.FarmId);
     columns.Bound(p => p.Vaccine);
-    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatebreedvaccine(event,this)\" href=\"/BreedVaccine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletebreedvaccine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedVaccine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatebreedvaccine(event,this)\" href=\"/BreedVaccine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletebreedvaccine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedVaccine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
 
                           );
-
-
+        
     })
     .Pageable()
     .Sortable()
@@ -29,11 +28,11 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(20)
-        .Read(read => read.Action("GetAllVaccine", "BreedVaccine",new { id = Model }))
+        .Read(read => read.Action("GetAllVaccine", "BreedVaccine", new { id = Model }))
         .Sort(x => x.Add("Age").Ascending())
      )
     )
-
+</div>
 
 
 
@@ -48,5 +47,11 @@
 .Draggable(true)
     )
 
+<style>
+    #breedvaccinegrid{
+        font-size: 14px;
+        font-family: Arial;
+    }
+</style>
 
    

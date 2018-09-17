@@ -28,12 +28,11 @@ textarea {
 }
 
 .breed{
-    margin-top:5px;
-    margin-bottom:5px;
+    margin:5px !important;
 }
 
 .k-grid td{
-    border-width: 0 0 0 0;
+    border-width: 0 0 0 0 !important;
     height: 50px;
 }
 
@@ -47,15 +46,41 @@ textarea {
 }
 
 .k-button{
-    /*border: none;*/
-    border-color: #fafafa;
-    background-color: #fafafa;
+    border-color: #fafafa !important;
+    background-color: #fafafa !important;
     text-transform: uppercase;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
 }
 .k-button:hover {
-    background-color:#3674d8;
-    color: #fff;
+    background-color:#3674d8 !important;
+    color: #fff !important;
     transform: translateY(-2px);
+}
+
+.k-grid-header th.k-header>.k-link{
+    color:#ffffff;
+    border-width: 0 0 0 0;
+}
+
+.k-grid-header .k-header{
+    background-color: #3c8dbc;
+}
+
+.k-grid-header th.k-header{
+    border-width: 0 0 0 0;
+}
+
+.k-header{
+    background-color:#cde4e3;
+}
+
+.k-state-selected{
+    background-color: #269ec1 !important;
+    border-color: #269ec1 !important;
+}
+
+.nav-tabs > li > a{
+    font-size: 14px;
+    font-family: Arial;
 }

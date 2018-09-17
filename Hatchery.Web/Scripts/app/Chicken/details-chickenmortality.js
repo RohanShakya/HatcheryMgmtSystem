@@ -12,7 +12,7 @@ function updatechickenmortality(e, link) {
     }
 function deletechickenmortality(e, element) {
     e.preventDefault();
-    if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+    if (window.confirm("are you sure you want to permanently remove this record? ")) {
 
         $.ajax({
             type: "POST",

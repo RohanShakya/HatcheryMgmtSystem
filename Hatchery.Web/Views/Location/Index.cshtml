@@ -1,12 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rooms";
 }
 
-<h2>Rooms</h2>
+@*<h2>Rooms</h2>*@
 
 <div>
-    @Html.ActionLink("Add new Room", "Create", null, new { @class = "btn btn-primary", id = "add-location" })
+    <a href="@Url.Action("Create","Location")" class="k-button k-button-icontext" id="add-location" style="margin: 2px;"> <span class="k-icon k-i-add"></span> Add new record</a>
 </div>
 
 <div id="example">
@@ -22,8 +22,8 @@
 
     //columns.Bound(p => p.HatcheryFarm.Name);
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                               "<a onclick=\"updateLocation(event,this)\" href=\"/location/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"removeLocation(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Location/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "<a onclick=\"updateLocation(event,this)\" href=\"/location/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"removeLocation(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Location/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 
@@ -76,7 +76,7 @@
         }
         function removeLocation(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+            if (window.confirm("are you sure you want to permanently remove this record? ")) {
 
                 $.ajax({
                     type: "POST",

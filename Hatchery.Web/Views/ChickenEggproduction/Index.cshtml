@@ -20,8 +20,8 @@
     columns.Bound(p => p.TotalEggs);
     columns.Bound(p => p.DateCreated).Hidden();
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                            "<a onclick=\"updatechickeneggproduction(event,this)\" href=\"/ChickenEggproduction/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletechickeneggproduction(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenEggproduction/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                            "<a onclick=\"updatechickeneggproduction(event,this)\" href=\"/ChickenEggproduction/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletechickeneggproduction(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenEggproduction/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 

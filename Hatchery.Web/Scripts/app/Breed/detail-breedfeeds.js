@@ -16,7 +16,7 @@ function updatebreedfeeds(e, link) {
 }
 function deletebreedfeeds(e, element) {
     e.preventDefault();
-    if (window.confirm("are you sure you want to remove Breedfeeds ")) {
+    if (window.confirm("are you sure you want to remove this record? ")) {
 
         $.ajax({
             type: "POST",

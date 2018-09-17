@@ -1,12 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Breeds";
 }
 
-<h2>Breeds</h2>
+@*<h2>Breeds</h2>*@
 
 <div>
-    @Html.ActionLink("Add new Breed", "Create", null, new { @class = "btn btn-primary", id = "add-breed" })
+    <a href="@Url.Action("Create","Breed")" class="k-button k-button-icontext" id="add-breed" style="margin: 2px;"> <span class="k-icon k-i-add"></span> Add new record</a>
 </div>
 
 <div id="example">
@@ -17,8 +17,8 @@
     columns.Bound(p => p.Id).Hidden();
     columns.Bound(p => p.Name).ClientTemplate("<a href='/Breed/Details/#=Id#'>#=Name#</a>");
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                               "<a onclick=\"updateBreed(event,this)\" href=\"/breed/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"removeBreed(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Breed/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "<a onclick=\"updateBreed(event,this)\" href=\"/breed/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"removeBreed(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Breed/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 
@@ -70,7 +70,7 @@
         }
         function removeBreed(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+            if (window.confirm("are you sure you want to permanently remove this record? ")) {
 
                 $.ajax({
                     type: "POST",

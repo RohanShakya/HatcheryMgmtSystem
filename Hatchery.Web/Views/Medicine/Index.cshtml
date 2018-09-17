@@ -1,14 +1,16 @@
 ﻿@model Nepaltech.Entities.Medicine
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Medicine";
 }
 
 
-<h2>Medicine </h2>
+@*<h2>Medicine </h2>*@
 
 <div>
-    @Html.ActionLink("Add new Medicine", "Create", null, new { @class = "btn btn-primary", id = "add-medicine" })
-</div><div id="example">
+    <a href="@Url.Action("Create","Medicine")" class="k-button k-button-icontext" id="add-medicine" style="margin: 2px;"> <span class="k-icon k-i-add"></span> Add new record</a>
+</div>
+
+<div id="example">
     @(Html.Kendo().Grid<Nepaltech.Entities.Medicine>()
     .Name("grid")
     .Columns(columns =>
@@ -20,8 +22,8 @@
     columns.Bound(p => p.RecomendedDoctor);
     columns.Bound(p => p.Date).Format("{0:MMM dd,yyyy, ddd}");
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                               "<a onclick=\"updateMedicine(event,this)\" href=\"/Medicine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deleteMedicine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Medicine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "<a onclick=\"updateMedicine(event,this)\" href=\"/Medicine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deleteMedicine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Medicine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
 
                           );
@@ -78,7 +80,7 @@
         }
         function deleteMedicine(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove BreedMedicine ?")) {
+            if (window.confirm("are you sure you want to permanently remove this record?")) {
 
                 $.ajax({
                     type: "POST",

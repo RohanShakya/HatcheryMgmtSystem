@@ -4,10 +4,7 @@
 }
 @model string
 
-
-
-
-<div id="example">
+<div id="breedfeedgrid">
     @(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedFeedModel>()
     .Name("BreedFeedgrid")
     .Columns(columns =>
@@ -20,14 +17,12 @@
     columns.Bound(p => p.MaleQuantity).ClientTemplate("#=MaleQuantity#" + " grams");
 
     columns.Bound(p => p.FemaleQuantity).ClientTemplate("#=FemaleQuantity#" + " grams");
-    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatebreedfeeds(event,this)\" href=\"/BreedFeed/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletebreedfeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedFeed/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatebreedfeeds(event,this)\" href=\"/BreedFeed/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletebreedfeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedFeed/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
 
                           );
-
-
-
+        
     })
     .Pageable()
     .Sortable()
@@ -56,3 +51,10 @@
 .Visible(false)
 .Draggable(true)
 )
+
+<style>
+    #breedfeedgrid {
+        font-size: 14px;
+        font-family: Arial;
+    }
+</style>

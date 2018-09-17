@@ -19,8 +19,8 @@
     columns.Bound(p => p.MaleQuantity).ClientTemplate("#=MaleQuantity#" + " grams");
     columns.Bound(p => p.FemaleQuantity).ClientTemplate("#=FemaleQuantity#" + " grams");
     columns.Bound(p => p.DateEntry).Format("{0:MMM dd, yyyy, ddd}");
-    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatechickenfeeds(event,this)\" href=\"/ChickenFeeds/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                 "<form onsubmit=\"deletechickenfeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenFeeds/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+    columns.Template(@<text>option</text>).ClientTemplate("<a onclick=\"updatechickenfeeds(event,this)\" href=\"/ChickenFeeds/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                 "<form onsubmit=\"deletechickenfeeds(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenFeeds/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                  "</form>"
 
             );

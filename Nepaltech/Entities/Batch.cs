@@ -20,7 +20,8 @@ namespace Nepaltech.Entities
         public int DeadFemale { get; set; }
         public int TotalCost { get; set; }
         public bool Closed { get; set; }
-        public int BatchCount { get; set; }
+        public int PlacedMale { get; set; }
+        public int PlacedFemale { get; set; }
 
         public virtual Country Country { get; set; }
         public virtual Breed Breed { get; set; }

@@ -6,7 +6,8 @@
 @*<h2>_EditChickenInFarm</h2>*@
 
 <form action="@(Url.Action("Edit"))" method="post" class="nt-form col-md-11" id="form-add-batchchicken">
-
+    @Html.HiddenFor(x=>x.PlacedMalePrevious)
+    @Html.HiddenFor(x=>x.PlacedFemalePrevious)
     <div class="form-horizontal">
         @*<h4>AddChickenInFarmModel</h4>*@
         <hr />
@@ -32,6 +33,7 @@
                 @Html.ValidationMessageFor(model => model.BatchId, "", new { @class = "text-danger" })
             </div>
         </div>
+        <br />
 
         <div class="row">
             <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="FarmId">Farm</label> </div> </div>
@@ -55,59 +57,63 @@
                     )
                     @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
             </div>
-            </div>
-            <div class="row">
-                <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BuildingId">Building</label> </div> </div>
-                <div class="col-md-offset-0 col-md-6">
-                        @*@Html.DropDownList("locationId", null, new { @class = "form-control" })*@
-                        @(Html.Kendo().DropDownList()
-              .Name("BuildingId")
-              .HtmlAttributes(new { style = "width:100%" })
-              .OptionLabel("Select building...")
-              .DataTextField("BuildingName")
-              .DataValueField("Id")
-              .DataSource(source =>
-              {
-                  source.Read(read =>
-                  {
-                      read.Action("GetCascadeBuilding", "AddChicken").Data("filterProducts");
-                  })
-                  .ServerFiltering(true);
-              })
-              .Enable(false)
-              .AutoBind(false)
-              .CascadeFrom("FarmId")
-                        )
-                        @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId">Room</label> </div> </div>
-                <div class="col-md-offset-0 col-md-6">
+        </div>
+        <br />
 
-                        @*@Html.DropDownList("locationId", null, new { @class = "form-control" })*@
-                        @(Html.Kendo().DropDownList()
-              .Name("LocationId")
-              .HtmlAttributes(new { style = "width:100%" })
-              .OptionLabel("Select location...")
-              .DataTextField("LocationName")
-              .DataValueField("Id")
-              .DataSource(source =>
-              {
-                  source.Read(read =>
-                  {
-                      read.Action("GetCascadeLocations", "AddChicken").Data("filterProduct");
-                  })
-                  .ServerFiltering(true);
-              })
-              .Enable(false)
-              .AutoBind(false)
-              .CascadeFrom("BuildingId")
-                        )
-                        @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
-                </div>
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="BuildingId">Building</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+                    @*@Html.DropDownList("locationId", null, new { @class = "form-control" })*@
+                    @(Html.Kendo().DropDownList()
+            .Name("BuildingId")
+            .HtmlAttributes(new { style = "width:100%" })
+            .OptionLabel("Select building...")
+            .DataTextField("BuildingName")
+            .DataValueField("Id")
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetCascadeBuilding", "AddChicken").Data("filterProducts");
+                })
+                .ServerFiltering(true);
+            })
+            .Enable(false)
+            .AutoBind(false)
+            .CascadeFrom("FarmId")
+                    )
+                    @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
             </div>
+        </div>
+        <br />
 
+        <div class="row">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="LocationId">Room</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
+
+                    @*@Html.DropDownList("locationId", null, new { @class = "form-control" })*@
+                    @(Html.Kendo().DropDownList()
+            .Name("LocationId")
+            .HtmlAttributes(new { style = "width:100%" })
+            .OptionLabel("Select location...")
+            .DataTextField("LocationName")
+            .DataValueField("Id")
+            .DataSource(source =>
+            {
+                source.Read(read =>
+                {
+                    read.Action("GetCascadeLocations", "AddChicken").Data("filterProduct");
+                })
+                .ServerFiltering(true);
+            })
+            .Enable(false)
+            .AutoBind(false)
+            .CascadeFrom("BuildingId")
+                    )
+                    @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
 
         <div class="row">
             <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalMale">Total Male</label> </div> </div>
@@ -116,21 +122,21 @@
                     @Html.ValidationMessageFor(model => model.TotalMale, "", new { @class = "text-danger" })
             </div>
         </div>
+        <br />
+
         <div class="row">
             <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalFemale">Total Female</label> </div> </div>
             <div class="col-md-offset-0 col-md-6">
                     @Html.Kendo().TextBoxFor(m => m.TotalFemale)
                     @Html.ValidationMessageFor(model => model.TotalFemale, "", new { @class = "text-danger" })
             </div>
-        
-           
         </div>
         @Html.HiddenFor(model => model.DateCreated)
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-default" />
             @*@Html.ActionLink("Back to List", "Index")*@
         </div>
-
+    </div>
 </form>
 
     @*<script>

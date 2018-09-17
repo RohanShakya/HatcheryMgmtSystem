@@ -3,7 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-@(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedWeightModel>()
+<div id="breedweightgrid">
+    @(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedWeightModel>()
     .Name("BreedWeightId")
     .Columns(columns =>
     {
@@ -13,8 +14,8 @@
     columns.Bound(p => p.Age).ClientTemplate("#=Age#" + " days");
     columns.Bound(p => p.Weight).ClientTemplate("<a href='/BreedWeight/Details/#=Id#'>#=Weight#</a>");
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                            "<a onclick=\"updateBreedWeight(event,this)\" href=\"/BreedWeight/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deleteBreedWeight(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedWeight/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                            "<a onclick=\"updateBreedWeight(event,this)\" href=\"/BreedWeight/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deleteBreedWeight(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedWeight/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 
@@ -30,7 +31,8 @@
         .Read(read => read.Action("GetBreedWeight", "BreedWeight"))
         .Sort(x => x.Add("Age").Ascending())
      )
-)
+    )
+</div>
 
 @(Html.Kendo().Window()
 .Name("window-update-breedweight")
@@ -44,3 +46,10 @@
 
 
 )
+
+<style>
+    #breedweightgrid {
+        font-size: 14px;
+        font-family: Arial;
+    }
+</style>

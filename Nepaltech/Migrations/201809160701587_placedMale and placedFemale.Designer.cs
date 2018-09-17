@@ -7,13 +7,13 @@ namespace Nepaltech.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class batchCount : IMigrationMetadata
+    public sealed partial class placedMaleandplacedFemale : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(batchCount));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(placedMaleandplacedFemale));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809060623575_batchCount"; }
+            get { return "201809160701587_placedMale and placedFemale"; }
         }
         
         string IMigrationMetadata.Source

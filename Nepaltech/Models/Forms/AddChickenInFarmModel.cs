@@ -30,6 +30,9 @@ namespace Nepaltech.Models.Forms
         public string BuildingName { get; set; }
         public string Location { get; set; }
 
+        public int PlacedMalePrevious { get; set; }
+        public int PlacedFemalePrevious { get; set; }
+
     }
     public class BatchShiftModel: AddChickenInFarmModel
     {

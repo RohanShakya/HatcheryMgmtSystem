@@ -381,7 +381,9 @@ namespace Nepaltech.Businesses
             entity.DeadFemale = model.DeadFemale;
             entity.TotalCost = model.TotalCost;
             entity.DateCreated = DateTime.Now;
-            entity.BatchCount = model.TotalMale + model.TotalFemale;
+            //entity.BatchCount = model.TotalMale + model.TotalFemale;
+            entity.PlacedMale = 0;
+            entity.PlacedFemale = 0;
             BatchManager.Add(entity);
             _unitOfWork.DataContext.SaveChanges();
         }
@@ -482,7 +484,8 @@ namespace Nepaltech.Businesses
 
             var batchId = model.BatchId;
             var batch = BatchManager.Find(batchId);
-            var batchCount = batch.BatchCount;
+            var placedMale = batch.PlacedMale;
+            var placedFemale = batch.PlacedFemale;
 
             var entity = new AddChickenInFarm();
             entity.Id = Guid.NewGuid().ToString();
@@ -497,16 +500,21 @@ namespace Nepaltech.Businesses
             entity.TotalFemale = model.TotalFemale;
             entity.DateCreated = DateTime.Now;
 
-            batchCount = batchCount - entity.TotalMale - entity.TotalFemale;
-            batch.BatchCount = batchCount;
-            if (batchCount >= 0)
+            batch.PlacedMale = placedMale + entity.TotalMale;
+            batch.PlacedFemale = placedFemale + entity.TotalFemale;
+
+            if(batch.PlacedMale > batch.TotalMale && batch.PlacedFemale > batch.TotalFemale){
+                return 3;
+            }else if(batch.PlacedMale > batch.TotalMale)
             {
-                AddChickenInFarmManager.Add(entity);
-                _unitOfWork.DataContext.SaveChanges();
                 return 1;
-            }
-            else
-            { 
+            }else if(batch.PlacedFemale > batch.TotalFemale)
+            {
+                return 2;
+            }else
+            {
+                AddChickenInFarmManager.Update(entity);
+                _unitOfWork.DataContext.SaveChanges();
                 return 0;
             }
 
@@ -544,11 +552,19 @@ namespace Nepaltech.Businesses
             model.TotalFemale = entity.TotalFemale;
             model.DateCreated = entity.DateCreated;
 
+            model.PlacedMalePrevious = model.TotalMale;
+            model.PlacedFemalePrevious = model.TotalFemale;
+
             return model;
         }
 
-        public void EditChickenInFarm(AddChickenInFarmModel model)
+        public int EditChickenInFarm(AddChickenInFarmModel model)
         {
+            var batchId = model.BatchId;
+            var batch = BatchManager.Find(batchId);
+            var placedMale = batch.PlacedMale - model.PlacedMalePrevious;
+            var placedFemale = batch.PlacedFemale - model.PlacedFemalePrevious;
+
             var entity = new AddChickenInFarm();
             entity.Id = model.Id;
             entity.BatchId = model.BatchId;
@@ -561,8 +577,27 @@ namespace Nepaltech.Businesses
             entity.DateCreated = model.DateCreated;
             entity.TotalMale = model.TotalMale;
             entity.TotalFemale = model.TotalFemale;
-            AddChickenInFarmManager.Update(entity);
-            _unitOfWork.DataContext.SaveChanges();
+
+            batch.PlacedMale = placedMale + entity.TotalMale;
+            batch.PlacedFemale = placedFemale + entity.TotalFemale;
+
+            if (batch.PlacedMale > batch.TotalMale && batch.PlacedFemale > batch.TotalFemale)
+            {
+                return 3;
+            }else if (batch.PlacedMale > batch.TotalMale)
+            {
+                return 1;
+            }
+            else if (batch.PlacedFemale > batch.TotalFemale)
+            {
+                return 2;
+            }
+            else
+            {
+                AddChickenInFarmManager.Update(entity);
+                _unitOfWork.DataContext.SaveChanges();
+                return 0;
+            }
         }
 
         public BatchShiftModel ShiftChickenToFarm(string id)

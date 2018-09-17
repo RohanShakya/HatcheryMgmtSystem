@@ -1,14 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vaccine";
 }
 
-
-
 <div>
-    @Html.ActionLink("Add new Vaccine", "Create", null, new { @class = "btn btn-primary", id = "add-vaccine" })
+    <a href="@Url.Action("Create","Vaccine")" class="k-button k-button-icontext" id="add-vaccine" style="margin: 2px;"> <span class="k-icon k-i-add"></span> Add new vaccine</a>
+</div>
 
-</div><div id="example">
+<div id="example">
     @(Html.Kendo().Grid<Nepaltech.Entities.Vaccine>()
     .Name("grid")
     .Columns(columns =>
@@ -16,8 +15,8 @@
     columns.Bound(p => p.Id).Hidden();
     columns.Bound(p => p.VaccineName).ClientTemplate("<a href='/Vaccine/Details/#=Id#'>#=VaccineName#</a>");
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                               "<a onclick=\"updatevaccine(event,this)\" href=\"/Vaccine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletevaccine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Vaccine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                               "<a onclick=\"updatevaccine(event,this)\" href=\"/Vaccine/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletevaccine(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/Vaccine/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                                                                  );
 
@@ -71,7 +70,7 @@
         }
         function deletevaccine(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove vaccine")) {
+            if (window.confirm("are you sure you want to permanently remove this record?")) {
 
                 $.ajax({
                     type: "POST",

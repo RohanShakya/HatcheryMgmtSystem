@@ -7,7 +7,7 @@
 </div>*@
 
 
-<div id="ggg">
+<div id="breedegggrid">
     @(Html.Kendo().Grid<Nepaltech.Models.Forms.BreedEggModel>()
     .Name("BreedEggProductionid")
     .Columns(columns =>
@@ -22,8 +22,8 @@
 
     columns.Bound(p => p.DateCreated).Hidden();
     columns.Template(@<text>option</text>).ClientTemplate(
-                                                            "<a onclick=\"updatebreedeggproduction(event,this)\" href=\"/BreedEggProduction/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletebreedeggproduction(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedEggProduction/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                            "<a onclick=\"updatebreedeggproduction(event,this)\" href=\"/BreedEggProduction/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletebreedeggproduction(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/BreedEggProduction/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 
@@ -56,3 +56,10 @@
 
 
 )
+
+<style>
+    #breedegggrid {
+        font-size: 14px;
+        font-family: Arial;
+    }
+</style>

@@ -142,9 +142,9 @@
     <Compile Include="Migrations\201804221126552_parentIdInAddChicken.Designer.cs">
       <DependentUpon>201804221126552_parentIdInAddChicken.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809060623575_batchCount.cs" />
-    <Compile Include="Migrations\201809060623575_batchCount.Designer.cs">
-      <DependentUpon>201809060623575_batchCount.cs</DependentUpon>
+    <Compile Include="Migrations\201809160701587_placedMale and placedFemale.cs" />
+    <Compile Include="Migrations\201809160701587_placedMale and placedFemale.Designer.cs">
+      <DependentUpon>201809160701587_placedMale and placedFemale.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Forms\BatchModel.cs" />
@@ -255,8 +255,8 @@
     <EmbeddedResource Include="Migrations\201804221126552_parentIdInAddChicken.resx">
       <DependentUpon>201804221126552_parentIdInAddChicken.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809060623575_batchCount.resx">
-      <DependentUpon>201809060623575_batchCount.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809160701587_placedMale and placedFemale.resx">
+      <DependentUpon>201809160701587_placedMale and placedFemale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

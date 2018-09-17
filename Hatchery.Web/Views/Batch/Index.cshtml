@@ -1,9 +1,9 @@
 ﻿@model Nepaltech.Models.Forms.BatchModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Batch";
 }
 
-<h2>Batch</h2>
+@*<h2>Batch</h2>*@
 
 <div>
     <form action="@Url.Action("ExportServer", "Grid")" method="POST">
@@ -95,7 +95,7 @@
         }
         function removeBatch(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+            if (window.confirm("are you sure you want to permanently remove this record? ")) {
 
                 $.ajax({
                     type: "POST",
@@ -160,32 +160,17 @@
 }
 
 <style>
-    .k-grid td {
-        border-width: 0 0 0 0;
-        height: 50px;
-    }
+  .k-filter-row th{
+      border-width: 0;
+  }
 
-    #example {
-        font-size: 14px;
-        font-family: Arial;
-    }
+  .k-state-selected{
+    background-color: #269ec1;
+    border-color: #269ec1
+}
+  .k-filtercell>.k-operator-hidden{
+      padding-right: 0;
+  }
 
-    .k-grid-header {
-        background-color: white;
-    }
 
-    .k-button {
-        /*border: none;*/
-        border-color: #fafafa;
-        background-color: #fafafa;
-        text-transform: uppercase;
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease 0s;
-    }
-
-        .k-button:hover {
-            background-color: #3674d8;
-            color: #fff;
-            transform: translateY(-2px);
-        }
 </style>

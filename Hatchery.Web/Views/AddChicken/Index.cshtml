@@ -1,15 +1,16 @@
 ﻿@using Nepaltech.Models.ApiModels;
 @model Nepaltech.Models.Forms.AddChickenInFarmModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Add Chicken In Farms";
 }
 
-<h2>Add Chicken In Farms</h2>
+@*<h2>Add Chicken In Farms</h2>*@
 
 <div>
 
     @*@Html.ActionLink("ADD NEW RECORD", "Create", null , new { @class = "btn btn-primary", id = "btn-add-batchchicken" })*@
     <a href="/AddChicken/Create" class="k-button k-button-icontext" id = "btn-add-batchchicken" style="margin: 2px;"><span class="k-icon k-i-add"></span>Add new Record</a>
+    
 </div>
 @*@(Html.Kendo().DatePicker()
       .Name("datepicker")
@@ -37,6 +38,7 @@
                                                                "<form onsubmit=\"removeBatchChicken(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/AddChicken/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"+
                                                                "<a onclick=\"shiftBatchChicken(event,this)\" href=\"/AddChicken/shift/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-redo\"></span>Shift</a>"
+                                                               
                           );
 
     })
@@ -98,7 +100,7 @@
 
         function removeBatchChicken(e, element) {
             e.preventDefault();
-            if (window.confirm("are you sure you want to permanently remove payment Type ")) {
+            if (window.confirm("are you sure you want to permanently remove this record? ")) {
 
                 $.ajax({
                     type: "POST",
@@ -214,6 +216,10 @@
         background-color:#cde4e3;
     }
 
+    .k-state-selected {
+        background-color: #269ec1;
+        border-color: #269ec1;
+    }
 </style>
 
 

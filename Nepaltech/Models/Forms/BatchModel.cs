@@ -32,7 +32,8 @@ namespace Nepaltech.Models.Forms
         [Required]
         public int TotalCost { get; set; }
         public bool Closed { get; set; }
-        public int BatchCount { get; set; }
+        public int PlacedMale { get; set; }
+        public int PlacedFemale { get; set; }
         public DateTime DateCreated { get; set; }
         
 

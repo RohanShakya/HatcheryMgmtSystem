@@ -25,10 +25,10 @@
 <div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">BreedVaccine</a></li>
-        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">BreedFeed</a></li>
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Breed Vaccine</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Breed Feed</a></li>
         <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Mortality</a></li>
-        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">EggProduction</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Egg Production</a></li>
         <li role="presentation"><a href="#breedWeight" aria-controls="breedWeight" role="tab" data-toggle="tab">Breed Weight</a></li>
     </ul>
 
@@ -36,7 +36,7 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="home">
             <div>
-                <a href="@(Url.Action("Create","BreedVaccine", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedvaccine">Add BreedVaccine</a>
+                <a href="@(Url.Action("Create","BreedVaccine", new { id = Model.Id }))" class="k-button k-button-icontext breed" id="btn-add-breedvaccine"><span class="k-icon k-i-add"></span> Add Breed Vaccine</a>
             </div>
             @{
                 // Html.RenderPartial("~/Views/BreedVaccine/Index.cshtml", new Nepaltech.Models.Forms.BreedVaccineModel());
@@ -55,7 +55,7 @@
         <div role="tabpanel" class="tab-pane" id="profile">
             <div>
 
-                <a href="@(Url.Action("Create","BreedFeed", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedfeeds">Add Breed Feeds</a>
+                <a href="@(Url.Action("Create","BreedFeed", new { id = Model.Id }))" class="k-button k-button-icontext breed" id="btn-add-breedfeeds"> <span class="k-icon k-i-add"></span> Add Breed Feeds</a>
             </div>
             @{
                 //Html.RenderPartial("~/Views/ChickenFeeds/Index.cshtml", new Nepaltech.Models.Forms.ChickenFeedModel());
@@ -66,7 +66,7 @@
 
             <div>
 
-                <a href="@(Url.Action("Create","BreedMortality", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-BreedMortality">Add BreedMortality</a>
+                <a href="@(Url.Action("Create","BreedMortality", new { id = Model.Id }))" class="k-button k-button-icontext breed" id="btn-add-BreedMortality"> <span class="k-icon k-i-add"></span> Add Breed Mortality</a>
             </div>
             @{
                 // Html.RenderPartial("~/Views/BreedMortality/Index.cshtml", new Nepaltech.Models.Forms.BreedMortalityModel());
@@ -76,7 +76,7 @@
         <div role="tabpanel" class="tab-pane" id="settings">
             <div>
 
-                <a href="@(Url.Action("Create","BreedEggProduction", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedeggproduction">Add EggProduction</a>
+                <a href="@(Url.Action("Create","BreedEggProduction", new { id = Model.Id }))" class="k-button k-button-icontext breed" id="btn-add-breedeggproduction"> <span class="k-icon k-i-add"></span> Add Egg Production</a>
             </div>
             @{
                 //  Html.RenderPartial("~/Views/BreedEggProduction/Index.cshtml", new Nepaltech.Models.Forms.BreedEggModel());
@@ -87,7 +87,7 @@
         <div role="tabpanel" class="tab-pane" id="breedWeight">
             <div>
 
-                <a href="@(Url.Action("Create","BreedWeight", new { id = Model.Id }))" class="btn btn-primary breed" id="btn-add-breedweight">Add Breed Weight</a>
+                <a href="@(Url.Action("Create","BreedWeight", new { id = Model.Id }))" class="k-button k-button-icontext breed" id="btn-add-breedweight"> <span class="k-icon k-i-add"></span> Add Breed Weight</a>
             </div>
             @{
                 Html.RenderPartial("~/Views/BreedWeight/Index.cshtml", new Nepaltech.Models.Forms.BreedWeightModel());
