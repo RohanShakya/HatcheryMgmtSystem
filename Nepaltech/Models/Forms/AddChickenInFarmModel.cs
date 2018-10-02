@@ -32,6 +32,8 @@ namespace Nepaltech.Models.Forms
 
         public int PlacedMalePrevious { get; set; }
         public int PlacedFemalePrevious { get; set; }
+        public DateTime? ShiftedDate { get; set; }
+        public string ParentId { get; set; }
 
     }
     public class BatchShiftModel: AddChickenInFarmModel
@@ -42,7 +44,7 @@ namespace Nepaltech.Models.Forms
         public string PreviousLocation { get; set; }
         public int PreviousMale { get; set; }
         public int PreviousFemale { get; set; }
-        public DateTime? ShiftedDate { get; set; }
-        public string ParentId { get; set; }
+        //public DateTime? ShiftedDate { get; set; }
+        //public string ParentId { get; set; }
     }
 }

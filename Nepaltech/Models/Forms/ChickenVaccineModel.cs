@@ -25,6 +25,7 @@ namespace Nepaltech.Models.Forms
         public string BatchChickenId { get; set; }
         public string BatchId { get; set; }
         public string BatchCode { get; set; }
+        public string AddChickenId { get; set; }
         //public DateTime DateEntry { get; set; }
 
         public string BreedId { get; set; }

@@ -105,9 +105,19 @@ namespace Hatchery.Web.Controllers
 
         public PartialViewResult Edit(string id)
         {
-            //var chickenVaccine = farmservice.ChickenVaccineManager.Find(id); 
-            var model = farmservice.EditChickenVaccine(id);
-            //ViewBag.VaccineId = new SelectList(db.Vaccines, "Id", "Name", chickenVaccine);
+            ViewBag.NullId = false;
+            ChickenVaccineModel model = new ChickenVaccineModel();
+
+            if(id == "null")
+            {
+                ViewBag.NullId = true;
+            }
+            else
+            {
+                model = farmservice.EditChickenVaccine(id);
+                //ViewBag.VaccineId = new SelectList(db.Vaccines, "Id", "Name", chickenVaccine);
+            }
+
             return PartialView(model);
         }
 

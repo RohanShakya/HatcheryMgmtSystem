@@ -381,7 +381,6 @@ namespace Nepaltech.Businesses
             entity.DeadFemale = model.DeadFemale;
             entity.TotalCost = model.TotalCost;
             entity.DateCreated = DateTime.Now;
-            //entity.BatchCount = model.TotalMale + model.TotalFemale;
             entity.PlacedMale = 0;
             entity.PlacedFemale = 0;
             BatchManager.Add(entity);
@@ -554,6 +553,8 @@ namespace Nepaltech.Businesses
 
             model.PlacedMalePrevious = model.TotalMale;
             model.PlacedFemalePrevious = model.TotalFemale;
+            model.ShiftedDate = entity.ShiftedDate;
+            model.ParentId = entity.ParentId;
 
             return model;
         }
@@ -577,6 +578,8 @@ namespace Nepaltech.Businesses
             entity.DateCreated = model.DateCreated;
             entity.TotalMale = model.TotalMale;
             entity.TotalFemale = model.TotalFemale;
+            entity.ShiftedDate = model.ShiftedDate;
+            entity.ParentId = model.ParentId;
 
             batch.PlacedMale = placedMale + entity.TotalMale;
             batch.PlacedFemale = placedFemale + entity.TotalFemale;
@@ -628,15 +631,15 @@ namespace Nepaltech.Businesses
             entity.BuildingId = model.PreviousBuildingId;
             entity.LocationId = model.PreviousLocationId;
             entity.DateCreated = DateTime.Now;
-            entity.TotalMale = model.PreviousMale;
-            entity.TotalFemale = model.PreviousFemale;
+            entity.TotalMale = model.PreviousMale - model.TotalMale;
+            entity.TotalFemale = model.PreviousFemale - model.TotalFemale;
             entity.ShiftedDate = model.ShiftedDate;
             entity.ParentId = model.ParentId;
             AddChickenInFarmManager.Update(entity);
 
             //delete original record
-            var batchChicken = AddChickenInFarmManager.Find(model.Id);
-            AddChickenInFarmManager.Delete(batchChicken);
+            //var batchChicken = AddChickenInFarmManager.Find(model.Id);
+            //AddChickenInFarmManager.Delete(batchChicken);
 
             //add new record in new room
             var shiftentity = new AddChickenInFarm();
@@ -651,21 +654,22 @@ namespace Nepaltech.Businesses
             shiftentity.ShiftedDate = model.ShiftedDate;
             shiftentity.ParentId = model.Id;
             AddChickenInFarmManager.Add(shiftentity);
+            _unitOfWork.DataContext.SaveChanges();
 
             //add new record in previous room
-            var shiftentityPrevious = new AddChickenInFarm();
-            shiftentityPrevious.Id = Guid.NewGuid().ToString();
-            shiftentityPrevious.BatchId = model.BatchId;
-            shiftentityPrevious.FarmId = model.FarmId;
-            shiftentityPrevious.BuildingId = model.PreviousBuildingId;
-            shiftentityPrevious.LocationId = model.PreviousLocationId;
-            shiftentityPrevious.TotalMale = model.PreviousMale - model.TotalMale;
-            shiftentityPrevious.TotalFemale = model.PreviousFemale - model.TotalFemale;
-            shiftentityPrevious.DateCreated = DateTime.Now;
-            shiftentityPrevious.ShiftedDate = model.ShiftedDate;
-            shiftentityPrevious.ParentId = model.Id;
-            AddChickenInFarmManager.Add(shiftentityPrevious);
-            _unitOfWork.DataContext.SaveChanges();
+            //var shiftentityPrevious = new AddChickenInFarm();
+            //shiftentityPrevious.Id = Guid.NewGuid().ToString();
+            //shiftentityPrevious.BatchId = model.BatchId;
+            //shiftentityPrevious.FarmId = model.FarmId;
+            //shiftentityPrevious.BuildingId = model.PreviousBuildingId;
+            //shiftentityPrevious.LocationId = model.PreviousLocationId;
+            //shiftentityPrevious.TotalMale = model.PreviousMale - model.TotalMale;
+            //shiftentityPrevious.TotalFemale = model.PreviousFemale - model.TotalFemale;
+            //shiftentityPrevious.DateCreated = DateTime.Now;
+            //shiftentityPrevious.ShiftedDate = model.ShiftedDate;
+            //shiftentityPrevious.ParentId = model.Id;
+            //AddChickenInFarmManager.Add(shiftentityPrevious);
+            //_unitOfWork.DataContext.SaveChanges();
         }
 
         public void DeleteChickenInFarm(AddChickenInFarm batch)
@@ -686,20 +690,30 @@ namespace Nepaltech.Businesses
             var datalist = entitieslist.Select(x => new ChickenVaccineModel
             {
                 Id = x.Id,
-                //BatchChickenId = x.BatchChickenId,
                 BatchId = x.Batch.Id,
+                //AddChickenId = x.AddChickenId,
                 LocationId = x.Location.Id,
                 Location = x.Location.Location,
-                //BreedVaccineId = x.BreedVaccineId,
                 VaccineId = x.VaccineId,
-                Age = x.Age,
+                VaccineName = x.Vaccine.VaccineName,
+                //Age = x.Age,
                 VaccinationDate = x.VaccinationDate,
                 RecommendedDate = x.RecommendedDate,
-                DateCreated = x.DateCreated,
-                VaccineName = x.Vaccine.VaccineName,
-                //VaccineName = x.BreedVaccine.Vaccine.VaccineName
-             // }).ToList();
+                //DateCreated = x.DateCreated
             }).Where(x => x.BatchId == batchId).ToList();
+
+            //displaying chicken vaccines after add chicken shift
+            var cvShiftedEntities = AddChickenInFarmManager.GetAll().ToList().Join(ChickenVaccineManager.GetAll().ToList(), ac => ac.ParentId,
+             cv => cv.AddChickenId, (ac, cv) => new ChickenVaccineModel
+             {
+                 LocationId = ac.LocationId,
+                 Location = ac.Location.Location,
+                 VaccineId = cv.VaccineId,
+                 VaccineName = cv.Vaccine.VaccineName,
+                 VaccinationDate = cv.VaccinationDate,
+                 RecommendedDate = cv.RecommendedDate
+             }).ToList();
+            datalist = datalist.Union(cvShiftedEntities).ToList();
             return datalist;
         }
 
@@ -758,6 +772,7 @@ namespace Nepaltech.Businesses
                 ChickenVaccineModel chickenVaccineModel = new ChickenVaccineModel();
                 //chickenVaccineModel.Id = entity.Id;
                 chickenVaccineModel.BatchId = entity.BatchId;
+                chickenVaccineModel.AddChickenId = entity.Id;
                 chickenVaccineModel.FarmName = entity.Farm.Name;
                 chickenVaccineModel.Location = entity.Location.Location;
                 chickenVaccineModel.LocationId = entity.Location.Id;
@@ -781,6 +796,7 @@ namespace Nepaltech.Businesses
             var entity = new ChickenVaccine();
             entity.Id = Guid.NewGuid().ToString();
             entity.BatchId = model.BatchId;
+            entity.AddChickenId = model.AddChickenId;
             entity.LocationId = model.LocationId;
             entity.Age = model.Age;
             entity.VaccineId = model.VaccineId;
@@ -790,17 +806,12 @@ namespace Nepaltech.Businesses
             entity.RecommendedDate = DateTime.Now;
 
             //Calculating recommended date
-            //var batchChicken = AddChickenInFarmManager.Find(entity.BatchChickenId);
-            //string BreedId = batchChicken.BreedId;
-            //DateTime ArrivalDate = batchChicken.ArrivalDate;
-            //int breedVaccineAge = 2;
             string BreedId = model.BreedId;
             DateTime ArrivalDate = model.ArrivalDate;
             var breedVaccine = BreedVaccineManager.GetAll().Where(x => x.BreedId == BreedId && x.VaccineId == entity.VaccineId);
             int breedVaccineAge = breedVaccine.Select(x => x.Age).Single();
             entity.RecommendedDate = ArrivalDate.AddDays(breedVaccineAge);
-
-            //entity.RecommendedDate = model.RecommendedDate;
+            
             ChickenVaccineManager.Add(entity);
             _unitOfWork.DataContext.SaveChanges();
         }
@@ -819,6 +830,7 @@ namespace Nepaltech.Businesses
             ChickenVaccineModel chickenVaccineModel = new ChickenVaccineModel();
             chickenVaccineModel.Id = entity.Id;
             chickenVaccineModel.BatchId = entity.BatchId;
+            chickenVaccineModel.AddChickenId = entity.AddChickenId;
             chickenVaccineModel.LocationId = entity.LocationId;
             chickenVaccineModel.BatchCode = entity.Batch.Code;
             chickenVaccineModel.BreedId = entity.Batch.BreedId;
@@ -840,6 +852,7 @@ namespace Nepaltech.Businesses
             var entity = new ChickenVaccine();
             entity.Id = model.Id;
             entity.BatchId = model.BatchId;
+            entity.AddChickenId = model.AddChickenId;
             entity.LocationId = model.LocationId;
             entity.VaccineId = model.VaccineId;
             entity.VaccinationDate = model.VaccinationDate;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nepaltech.Entities
 {
-    [Table("BatchChicken")]
+    [Table("AddChicken")]
     public class AddChickenInFarm:BaseEntity
     {
         public string BatchId { get; set; }

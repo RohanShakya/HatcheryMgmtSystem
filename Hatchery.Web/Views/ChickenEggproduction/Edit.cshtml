@@ -12,8 +12,8 @@
         @Html.HiddenFor(model => model.BatchId)
         @Html.HiddenFor(model => model.LocationId)
         <div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
         </div>
         @*<div class="row">
             <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
@@ -33,8 +33,8 @@
                     </div>*@
             
         <div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="TotalEggs">TotalEggs</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="TotalEggs">TotalEggs</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
                 <div class="col-10">
                     <div>
                         @Html.EditorFor(model => model.TotalEggs, new { htmlAttributes = new { @class = "form-control" } })
@@ -42,8 +42,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="GoodEggs">GoodEggs</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="GoodEggs">GoodEggs</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
                 <div>
                     @Html.EditorFor(model => model.GoodEggs, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.GoodEggs, "", new { @class = "text-danger" })
@@ -51,8 +51,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="SpoiltEggs">SpoiltEggs</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="SpoiltEggs">SpoiltEggs</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
                 <div>
                     @Html.EditorFor(model => model.SpoiltEggs, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.SpoiltEggs, "", new { @class = "text-danger" })
@@ -60,8 +60,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="DateEntry">DateEntry</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="DateEntry">DateEntry</label> </div> </div>
+            <div class="col-md-offset-0 col-md-6">
                 <div class="col-10" name="DateEntry">
                     @(Html.Kendo().DatePicker()
                   .Name("DateEntry")

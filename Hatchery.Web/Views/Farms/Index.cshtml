@@ -37,7 +37,7 @@
         .Ajax()
         .PageSize(20)
         .Read(read => read.Action("GetFarms", "Farms"))
-        .Sort(x=>x.Add("Name").Descending())
+        .Sort(x=>x.Add("Name").Ascending())
      )
     )
 </div>

@@ -13,8 +13,8 @@
     @Html.HiddenFor(model => model.LocationId)
     @*@Html.HiddenFor(model => model.FeedId)*@
     <div class="row">
-        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
-        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
     </div>
     @*<div class="row">
         <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
@@ -28,8 +28,8 @@
         <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">breed</label> </div> </div>
         <div class="col-md-offset-0 col-md-3"> <div>@Html.DisplayFor(m => m.Breed)</div> </div>*@
     <div class="row">
-        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="feed">Select Feed</label> </div> </div>
-        <div class="col-md-offset-0 col-md-3">
+        <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="feed">Select Feed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-6">
             @(Html.Kendo().DropDownList()
               .Name("FeedId")
               .HtmlAttributes(new { style = "width:150%" })
@@ -48,12 +48,12 @@
         </div>
         </div>
     <div class="row">
-        <div class="col-md-offset-0 col-md-2">
+        <div class="col-md-offset-0 col-md-3">
             <div> <label class="control-label" for="DateEntry">DateEntry</label> </div></div>
 
 
             @*@Html.EditorFor(m=>m.VaccinationDate, new { htmlAttributes = new { @class = "form-control" } })*@
-            <div class="col-md-offset-0 col-md-3">
+            <div class="col-md-offset-0 col-md-6">
                 @(Html.Kendo().DatePicker()
                   .Name("DateEntry")
                   .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })

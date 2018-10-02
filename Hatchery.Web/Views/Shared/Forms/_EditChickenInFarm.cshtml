@@ -6,6 +6,8 @@
 @*<h2>_EditChickenInFarm</h2>*@
 
 <form action="@(Url.Action("Edit"))" method="post" class="nt-form col-md-11" id="form-add-batchchicken">
+    @Html.HiddenFor(x=>x.ShiftedDate)
+    @Html.HiddenFor(x => x.ParentId)
     @Html.HiddenFor(x=>x.PlacedMalePrevious)
     @Html.HiddenFor(x=>x.PlacedFemalePrevious)
     <div class="form-horizontal">

@@ -26,5 +26,7 @@ namespace Nepaltech.Entities
         public virtual Country Country { get; set; }
         public virtual Breed Breed { get; set; }
         public virtual BreedTypes BreedType { get; set; } 
+
+
     }
 }

@@ -146,6 +146,14 @@
     <Compile Include="Migrations\201809160701587_placedMale and placedFemale.Designer.cs">
       <DependentUpon>201809160701587_placedMale and placedFemale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809180709126_AddChickenId added in ChickenVaccine.cs" />
+    <Compile Include="Migrations\201809180709126_AddChickenId added in ChickenVaccine.Designer.cs">
+      <DependentUpon>201809180709126_AddChickenId added in ChickenVaccine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810010647191_AddChicken table name changed.cs" />
+    <Compile Include="Migrations\201810010647191_AddChicken table name changed.Designer.cs">
+      <DependentUpon>201810010647191_AddChicken table name changed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Forms\BatchModel.cs" />
     <Compile Include="Models\Forms\BreedTypesModel.cs" />
@@ -257,6 +265,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809160701587_placedMale and placedFemale.resx">
       <DependentUpon>201809160701587_placedMale and placedFemale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809180709126_AddChickenId added in ChickenVaccine.resx">
+      <DependentUpon>201809180709126_AddChickenId added in ChickenVaccine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810010647191_AddChicken table name changed.resx">
+      <DependentUpon>201810010647191_AddChicken table name changed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -191,7 +191,6 @@
     <Compile Include="Controllers\AdminLteController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\AddChickenController.cs" />
-    <Compile Include="Controllers\BatchesController.cs" />
     <Compile Include="Controllers\BreedController.cs" />
     <Compile Include="Controllers\BreedEggProductionController.cs" />
     <Compile Include="Controllers\BreedFeedController.cs" />

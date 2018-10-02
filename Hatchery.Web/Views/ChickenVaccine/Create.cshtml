@@ -7,10 +7,6 @@
 
 <h2>Create</h2>
 
-@*@Html.HiddenFor(model => model.Id)
-@Html.HiddenFor(model => model.DateCreated)*@
-
-
 @*<form class="nt-form" action="/AddChicken/Details/@Model.BatchChickenId" method="post">*@
 @*<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-chickenvaccine">*@
 
@@ -64,6 +60,7 @@
             @for ( int i=0;i<Model.ChickenVaccines.Count;i++)
             {
             <tr>
+                @Html.HiddenFor(model => model.ChickenVaccines[i].AddChickenId)
                 <td>@(Model.ChickenVaccines[i].Location) @Html.HiddenFor(model => model.ChickenVaccines[i].LocationId)</td>
                 <td>
                 @(Html.Kendo().DropDownListFor(m=>m.ChickenVaccines[i].VaccineId)
