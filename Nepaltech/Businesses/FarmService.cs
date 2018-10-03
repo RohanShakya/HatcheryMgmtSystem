@@ -654,7 +654,6 @@ namespace Nepaltech.Businesses
             shiftentity.ShiftedDate = model.ShiftedDate;
             shiftentity.ParentId = model.Id;
             AddChickenInFarmManager.Add(shiftentity);
-            _unitOfWork.DataContext.SaveChanges();
 
             //add new record in previous room
             //var shiftentityPrevious = new AddChickenInFarm();
@@ -670,6 +669,25 @@ namespace Nepaltech.Businesses
             //shiftentityPrevious.ParentId = model.Id;
             //AddChickenInFarmManager.Add(shiftentityPrevious);
             //_unitOfWork.DataContext.SaveChanges();
+
+            //add chicken vaccine
+            var chickenvaccinee = ChickenVaccineManager.GetAll().Where(x => x.AddChickenId == entity.Id).ToList().OrderByDescending(x => x.VaccinationDate);
+            var chickenvaccine = ChickenVaccineManager.GetAll().Where(x=>x.AddChickenId == entity.Id).ToList().OrderByDescending(x => x.VaccinationDate).FirstOrDefault();
+            if(chickenvaccine != null)
+            {
+                var cv = new ChickenVaccine();
+                cv.Id = Guid.NewGuid().ToString();
+                cv.BatchId = chickenvaccine.BatchId;
+                cv.LocationId = shiftentity.LocationId;
+                cv.Age = chickenvaccine.Age;
+                cv.VaccineId = chickenvaccine.VaccineId;
+                cv.VaccinationDate = chickenvaccine.VaccinationDate;
+                cv.RecommendedDate = chickenvaccine.RecommendedDate;
+                cv.DateCreated = DateTime.Now;
+                //cv.AddChickenId = chickenvaccine.AddChickenId;
+                ChickenVaccineManager.Add(cv);
+            }
+            _unitOfWork.DataContext.SaveChanges();
         }
 
         public void DeleteChickenInFarm(AddChickenInFarm batch)
@@ -691,29 +709,29 @@ namespace Nepaltech.Businesses
             {
                 Id = x.Id,
                 BatchId = x.Batch.Id,
-                //AddChickenId = x.AddChickenId,
+                AddChickenId = x.AddChickenId,
                 LocationId = x.Location.Id,
                 Location = x.Location.Location,
                 VaccineId = x.VaccineId,
                 VaccineName = x.Vaccine.VaccineName,
-                //Age = x.Age,
+                Age = x.Age,
                 VaccinationDate = x.VaccinationDate,
                 RecommendedDate = x.RecommendedDate,
-                //DateCreated = x.DateCreated
+                DateCreated = x.DateCreated
             }).Where(x => x.BatchId == batchId).ToList();
 
             //displaying chicken vaccines after add chicken shift
-            var cvShiftedEntities = AddChickenInFarmManager.GetAll().ToList().Join(ChickenVaccineManager.GetAll().ToList(), ac => ac.ParentId,
-             cv => cv.AddChickenId, (ac, cv) => new ChickenVaccineModel
-             {
-                 LocationId = ac.LocationId,
-                 Location = ac.Location.Location,
-                 VaccineId = cv.VaccineId,
-                 VaccineName = cv.Vaccine.VaccineName,
-                 VaccinationDate = cv.VaccinationDate,
-                 RecommendedDate = cv.RecommendedDate
-             }).ToList();
-            datalist = datalist.Union(cvShiftedEntities).ToList();
+            //var cvShiftedEntities = AddChickenInFarmManager.GetAll().ToList().Join(ChickenVaccineManager.GetAll().ToList(), ac => ac.ParentId,
+            // cv => cv.AddChickenId, (ac, cv) => new ChickenVaccineModel
+            // {
+            //     LocationId = ac.LocationId,
+            //     Location = ac.Location.Location,
+            //     VaccineId = cv.VaccineId,
+            //     VaccineName = cv.Vaccine.VaccineName,
+            //     VaccinationDate = cv.VaccinationDate,
+            //     RecommendedDate = cv.RecommendedDate
+            // }).ToList();
+            //datalist = datalist.Union(cvShiftedEntities).ToList();
             return datalist;
         }
 

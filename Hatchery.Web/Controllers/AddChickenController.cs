@@ -21,7 +21,7 @@ namespace Hatchery.Web.Controllers
 
         FarmService farmservice = null;
         public ActionResult Index()
-       { 
+        { 
             return View();
         }
 
