@@ -42,6 +42,7 @@
             <div>
                 @*<input for="TotalMale" class="form-control" type="number" id="example-number-input">*@
                 @Html.Kendo().TextBoxFor(m => m.Age)
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

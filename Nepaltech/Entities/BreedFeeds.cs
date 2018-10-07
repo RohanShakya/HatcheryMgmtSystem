@@ -15,9 +15,9 @@ namespace Nepaltech.Entities
         public string FeedName { get; set; }
         public string GenderId { get; set; }
         public string Gender { get; set; }
-        public int Age { get; set; }
+        public int AgeFrom { get; set; }
+        public int AgeTo { get; set; }
         public float MaleQuantity { get; set; }
-
         public float FemaleQuantity { get; set; }
 
         public virtual Breed Breed { get; set; }

@@ -9,24 +9,20 @@
         .Name("chickenmortalityid")
         .Columns(columns =>
         {
-        columns.Bound(p => p.Id);/*.ClientTemplate*//*("<a href='/ChickenMortality/Details/#=Id#'>#=Id#</a>");*/
-    columns.Bound(p => p.Location);
-        columns.Bound(p => p.BatchId);
+        columns.Bound(p => p.Location);
         columns.Bound(p => p.MortalityPercentage);
-        // columns.Bound(p => p.BatchChickenId).Hidden();
-
         columns.Bound(p => p.DeadChickenMale);
         columns.Bound(p => p.DeadChickenFemale);
         columns.Bound(p => p.DateEntry).Format("{0:MMM dd, yyyy, ddd}");
         columns.Bound(p => p.DateCreated).Hidden();
         columns.Template(@<text>option</text>).ClientTemplate(
-                                                            "<a onclick=\"updatechickenmortality(event,this)\" href=\"/ChickenMortality/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-edit\"></span>Edit</a>" +
-                                                               "<form onsubmit=\"deletechickenmortality(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenMortality/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-delete\"></span>Delete</button></div>" +
+                                                            "<a onclick=\"updatechickenmortality(event,this)\" href=\"/ChickenMortality/edit/#: Id#\" class=\"k-button k-button-icontext edit-roomType\"><span class=\"k-icon k-i-edit\"></span>Edit</a>" +
+                                                               "<form onsubmit=\"deletechickenmortality(event,this)\" method=\"post\" class=\"k-grid-actions\" action=\"/ChickenMortality/delete?Id=#: Id#\"><div><button  type=\"submit\" class=\"k-button k-button-icontext k-grid-delete\"><span class=\"k-icon k-i-delete\"></span>Delete</button></div>" +
                                                                "</form>"
                           );
 
 
-    })
+        })
     .Pageable()
     .Sortable()
     .Scrollable()
@@ -36,6 +32,7 @@
         .Ajax()
         .PageSize(20)
         .Read(read => read.Action("GetChickenMortality", "ChickenMortality",new { id = Model }))
+        .Sort(x => x.Add("DateEntry").Ascending())
      )
     )
 </div>

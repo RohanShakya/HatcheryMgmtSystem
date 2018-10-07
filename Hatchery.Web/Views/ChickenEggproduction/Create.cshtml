@@ -6,8 +6,7 @@
 
 <form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-ChickenEggproduction">
     @Html.HiddenFor(model => model.BatchId)  
-      @Html.HiddenFor(model => model.BreedId)
-    @Html.HiddenFor(model => model.LocationId)
+    @Html.HiddenFor(model => model.BreedId)
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
@@ -19,11 +18,24 @@
             <div class="col-10" name="DateEntry">
                 @(Html.Kendo().DatePicker()
                           .Name("DateEntry")
-                          .Value("10/10/2017")
+                          .Value(DateTime.Now)
                           .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
                 )
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">Breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Breed) </div> </div>
+
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breedtype">BreedType</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BreedType) </div> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="age">Age</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Age) days</div> </div>
     </div>
     <table class="table">
         <tr>
@@ -58,7 +70,7 @@
     </table>
     <div>
         <input type="submit" value="Save" class="btn btn-default" />
-        @Html.ActionLink("Cancel", "Index", "AddChicken", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Cancel", "Details", "Batch", new { id = Model.BatchId }, new { @class = "btn btn-primary" })
      
     </div>
 </form>

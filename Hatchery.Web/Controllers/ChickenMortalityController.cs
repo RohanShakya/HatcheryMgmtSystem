@@ -37,10 +37,8 @@ namespace Hatchery.Web.Controllers
             }
         }
 
-                public ActionResult Create(string id)
+        public ActionResult Create(string id)
         {
-
-
             var model = sunil.AddChickenMortalityByBatch(id);
             return View(model);
         }
@@ -71,7 +69,6 @@ namespace Hatchery.Web.Controllers
                     foreach (var item in model.Chickenmortality)
                     {
                         item.BatchId = model.BatchId;
-                        item.LocationId = model.LocationId;
                         item.DateEntry = model.DateEntry;
 
                         sunil.AddChickenMortality(item);

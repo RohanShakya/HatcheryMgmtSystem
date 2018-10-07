@@ -48,7 +48,7 @@ namespace Hatchery.Web.Controllers
             model.BatchCode = batch.Code;
             model.Breed = batch.Breed.Name;
             model.ArrivalDate = batch.ArrivalDate;
-            model.Age = batch.Age;
+            model.Age = (DateTime.Now - batch.ArrivalDate).Days;
             return View(model);
         }
 

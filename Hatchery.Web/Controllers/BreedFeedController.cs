@@ -71,7 +71,7 @@ namespace Hatchery.Web.Controllers
             if (ModelState.IsValid)
             {
 
-                var breedfeed = db.BreedFeeds.Where(x => x.BreedTypeId == model.BreedTypeId && x.FeedName==model.FeedName &&x.Age==model.Age && x.DateDeleted == null);
+                var breedfeed = db.BreedFeeds.Where(x => x.BreedTypeId == model.BreedTypeId && x.FeedName==model.FeedName && x.AgeFrom==model.AgeFrom && x.DateDeleted == null);
                 if (breedfeed.Count() != 0)
                 {
                     ModelState.AddModelError("FeedId", "The Feed already exists!");
@@ -108,7 +108,7 @@ namespace Hatchery.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var breedfeed = db.BreedFeeds.Where(x => x.BreedTypeId == model.BreedTypeId && x.FeedName == model.FeedName && x.Age == model.Age && x.DateDeleted == null);
+                var breedfeed = db.BreedFeeds.Where(x => x.BreedTypeId == model.BreedTypeId && x.FeedName == model.FeedName && x.AgeFrom == model.AgeFrom &&  x.DateDeleted == null);
                 var dbId = breedfeed.FirstOrDefault()?.Id.ToUpper();
 
                 if (dbId != null && (dbId != model.Id.ToUpper()))

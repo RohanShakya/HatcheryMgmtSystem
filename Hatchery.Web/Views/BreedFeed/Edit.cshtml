@@ -64,10 +64,17 @@
     <br />
 
     <div class="row">
-        <div class="col-md-3"> @Html.LabelFor(model => model.Age) </div>
-        <div class="col-md-6">
-            @Html.Kendo().TextBoxFor(m=>m.Age)
-            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-3"> @Html.Label("Age (in days)")</div>
+            <div class="col-md-1">
+                @Html.Kendo().IntegerTextBoxFor(m => m.AgeFrom).HtmlAttributes(new { style = "width:70px", @min = "0" })
+                @Html.ValidationMessageFor(model => model.AgeFrom, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1" style="margin-left:20px; padding-right:0px"> to </div>
+            <div class="col-md-1">
+                @Html.Kendo().IntegerTextBoxFor(m => m.AgeTo).HtmlAttributes(new { style = "width:70px", @min = "0" })
+                @Html.ValidationMessageFor(model => model.AgeTo, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
     <br />
@@ -102,7 +109,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-0 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
     @Html.HiddenFor(model => model.BreedId)

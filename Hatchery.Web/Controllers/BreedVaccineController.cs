@@ -61,13 +61,12 @@ namespace Hatchery.Web.Controllers
                 if (breedvaccine.Count() != 0)
                 {
                     ModelState.AddModelError("Age", "Breedvaccine already exists for this age");
-                   
-                    return PartialView(model);
+                }else
+                {
+                    santosh.AddBreedVaccine(model);
+                    //return RedirectToAction("Details","Breed",new { id=model.BreedId});
+                    return Json(1, JsonRequestBehavior.AllowGet);
                 }
-
-                santosh.AddBreedVaccine(model);
-                //return RedirectToAction("Details","Breed",new { id=model.BreedId});
-                return Json(1, JsonRequestBehavior.AllowGet);
             }
             //ViewBag.BreedId = new SelectList(db.Breeds, "Id", "Name");
             //ViewBag.VaccineId = new SelectList(db.Vaccines, "Id", "Vaccine");

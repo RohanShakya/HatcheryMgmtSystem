@@ -49,7 +49,7 @@ namespace Hatchery.Web.Controllers
             var batch = db.Batch.Find(id);
             model.Breed = batch.Breed.Name;
             model.BreedType = batch.BreedType.BreedType;
-            model.Age = batch.Age;
+            model.Age = (DateTime.Now - model.ArrivalDate).Days;
             return View(model);
         }
 
@@ -103,7 +103,6 @@ namespace Hatchery.Web.Controllers
                    
                     item.DateEntry = model.DateEntry;
                     item.BatchId = model.BatchId;
-                    item.LocationId = model.LocationId;
                     santosh.AddChickenFeed(item);
                 }
 

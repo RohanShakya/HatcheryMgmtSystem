@@ -15,59 +15,47 @@
         <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
         <div class="col-md-offset-0 col-md-6"> <div> @Html.DisplayFor(m => m.BatchCode, new { @name = "BatchChickenId" }) </div> </div>
     </div>
-    @*<div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="farmName">Farm Name</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.FarmName) </div> </div>
 
-            <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="location">Location</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Location) </div> </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">breed</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3"> <div>@Html.DisplayFor(m => m.Breed)</div> </div>
-            <div class="col-md-offset-1 col-md-2"> <div> <label class="control-label" for="ageinweeks">AgeinWeeks</label> </div> </div>
-            <div class="col-md-offset-0 col-md-3">
-                </div>*@
     <div class="row">
         <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="MortalityPercentage">MortalityPercentage</label> </div> </div>
         <div class="col-md-offset-0 col-md-6">
             <div>
-                @Html.EditorFor(model => model.MortalityPercentage, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.MortalityPercentage, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.Kendo().IntegerTextBoxFor(m=>m.MortalityPercentage).HtmlAttributes(new { @min = "0" })
                 @Html.ValidationMessageFor(model => model.MortalityPercentage, "", new { @class = "text-danger" })
-              
-
-
             </div>
         </div>
     </div>
-
+    <br />
     <div class="row">
         <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="age">DeadChickenMale</label> </div> </div>
         <div class="col-md-offset-0 col-md-6">
             <div class="col-10">
                 <div>
-                    @Html.EditorFor(model => model.DeadChickenMale, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.Kendo().IntegerTextBoxFor(m => m.DeadChickenMale).HtmlAttributes(new { @min = "0" })
                     @Html.ValidationMessageFor(model => model.DeadChickenMale, "", new { @class = "text-danger" })
                 </div>
             
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="DeadChickenFemale">DeadChickenFemale</label> </div> </div>
         <div class="col-md-offset-0 col-md-6">
             <div>
-                @Html.EditorFor(model => model.DeadChickenFemale, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.Kendo().IntegerTextBoxFor(m => m.DeadChickenFemale).HtmlAttributes(new { @min = "0" })
                 @Html.ValidationMessageFor(model => model.DeadChickenFemale, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-
+    <br />
     <div class="row">
         <div class="col-md-offset-0 col-md-3"> <div> <label class="control-label" for="DateEntry">DateEntry</label> </div> </div>
         <div class="col-md-offset-0 col-md-6">
-            <div class="col-10" name="DateEntry">
+            <div>
                 @(Html.Kendo().DatePicker()
                   .Name("DateEntry")
-
                   .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
                 )
             </div>

@@ -210,7 +210,8 @@ namespace Nepaltech.Businesses
                 BreedType=x.BreedType.BreedType,
                 DateCreated = x.DateCreated,
                 BreedName = x.Breed.Name,
-                Age = x.Age,
+                AgeFrom = x.AgeFrom,
+                AgeTo = x.AgeTo,
                 MaleQuantity = x.MaleQuantity,
                 FemaleQuantity = x.FemaleQuantity,
                 GenderId = x.GenderId
@@ -238,7 +239,8 @@ namespace Nepaltech.Businesses
             entity.BreedTypeId = model.BreedTypeId;
             entity.GenderId = model.GenderId;
             entity.FeedId = model.FeedId;
-            entity.Age = model.Age;
+            entity.AgeFrom = model.AgeFrom;
+            entity.AgeTo = model.AgeTo;
             entity.MaleQuantity = model.MaleQuantity;
             entity.FemaleQuantity = model.FemaleQuantity;
             entity.FeedName = model.FeedName;
@@ -267,7 +269,8 @@ namespace Nepaltech.Businesses
             breedfeedsmodel.BreedType = entity.BreedType.BreedType;
             breedfeedsmodel.FeedName = entity.Feed.FeedName;
             breedfeedsmodel.FeedId = entity.FeedId;
-            breedfeedsmodel.Age = entity.Age;
+            breedfeedsmodel.AgeFrom = entity.AgeFrom;
+            breedfeedsmodel.AgeTo = entity.AgeTo;
             breedfeedsmodel.GenderId = entity.GenderId;
             breedfeedsmodel.MaleQuantity = entity.MaleQuantity;
             breedfeedsmodel.FemaleQuantity = entity.FemaleQuantity;
@@ -284,7 +287,8 @@ namespace Nepaltech.Businesses
             entity.BreedTypeId = model.BreedTypeId;
             entity.FeedName = model.FeedName;
             entity.FeedId = model.FeedId;
-            entity.Age = model.Age;
+            entity.AgeFrom = model.AgeFrom;
+            entity.AgeTo = model.AgeTo;
             entity.GenderId = model.GenderId;
             entity.MaleQuantity = model.MaleQuantity;
             entity.FemaleQuantity = model.FemaleQuantity;
@@ -400,7 +404,7 @@ namespace Nepaltech.Businesses
                 chickenfeedmodel.BatchId = entity.BatchId;
                 chickenfeedmodel.FarmName = entity.Farm.Name;
                 chickenfeedmodel.Location = entity.Location.Location;
-                //chickenfeedmodel.LocationId = entity.Location.Id;
+                chickenfeedmodel.LocationId = entity.Location.Id;
          
               //  chickenfeedmodel.Breed = entity.Breed.Name;
              //   chickenfeedmodel.BreedId = entity.BreedId;
@@ -412,7 +416,7 @@ namespace Nepaltech.Businesses
                 model.BatchId = entity.Batch.Id;
                 model.ArrivalDate = entity.Batch.ArrivalDate;
                 model.Age = (DateTime.Now - model.ArrivalDate).Days;
-                model.LocationId = entity.Location.Id;
+                //model.LocationId = entity.Location.Id;
             }
     
             return model;

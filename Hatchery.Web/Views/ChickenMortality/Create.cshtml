@@ -3,14 +3,12 @@
 @{
     ViewBag.Title = "Create";
   
-
 }
 @*<form action="@(Url.Action("Create"))"method="post" class="nt-form" id="form-add-chickenmortality">*@
 
 <form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-chickenmortality">
     @Html.HiddenFor(model=>model.BatchId)
     @Html.HiddenFor(model => model.BreedId)
-    @Html.HiddenFor(model => model.LocationId)
   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
         <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchcode">Batch Code</label> </div> </div>
@@ -21,11 +19,23 @@
             <div class="col-10" name="DateEntry">
                 @(Html.Kendo().DatePicker()
                           .Name("DateEntry")
-                          .Value("10/10/2017")
+                          .Value(DateTime.Now)
                           .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
                 )
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breed">Breed</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Breed) </div> </div>
+
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breedtype">BreedType</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BreedType) </div> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="age">Age</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Age) days</div> </div>
     </div>
     <table class="table">
         <tr>
@@ -41,17 +51,17 @@
                 <td>@(Model.Chickenmortality[i].Location) @Html.HiddenFor(model => model.Chickenmortality[i].LocationId)</td>
           
                 <td>
-                    @Html.Kendo().NumericTextBoxFor(m => m.Chickenmortality[i].MortalityPercentage)
+                    @Html.Kendo().NumericTextBoxFor(m => m.Chickenmortality[i].MortalityPercentage).HtmlAttributes(new { @min = "0" })
                     @Html.ValidationMessageFor(m => m.Chickenmortality[i].MortalityPercentage, "", new { @class = "text-danger" })
                  
                 </td>
             
                 <td>
-                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickenmortality[i].DeadChickenMale)
+                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickenmortality[i].DeadChickenMale).HtmlAttributes(new { @min = "0" })
                     @Html.ValidationMessageFor(m => m.Chickenmortality[i].DeadChickenMale, "", new { @class = "text-danger" })
                 </td>
                 <td>
-                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickenmortality[i].DeadChickenFemale)
+                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickenmortality[i].DeadChickenFemale).HtmlAttributes(new { @min = "0" })
                     @Html.ValidationMessageFor(m => m.Chickenmortality[i].DeadChickenFemale, "", new { @class = "text-danger" })
                 </td>
 
@@ -61,7 +71,7 @@
     </table>
     <div>
         <input type="submit" value="Save" class="btn btn-default" />
-        @Html.ActionLink("Cancel", "Index", "AddChicken", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Cancel", "Details", "Batch", new { id = Model.BatchId }, new { @class = "btn btn-primary" })
         @*@Html.ActionLink("Cancel", "Details", "AddChicken", new { @id = Model.BatchChickenId }, new { @class = "btn btn-primary" })*@
     </div>
 </form>

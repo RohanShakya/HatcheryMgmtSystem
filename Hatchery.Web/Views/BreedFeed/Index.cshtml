@@ -12,7 +12,7 @@
     columns.Bound(p => p.Id).Hidden();
     //columns.Bound(p => p.BreedName);
     columns.Bound(p => p.BreedType);
-    columns.Bound(p => p.Age).ClientTemplate("#=Age#" + " days");
+    columns.Bound(p => p.AgeFrom).ClientTemplate("#=AgeFrom#"+" - "+"#=AgeTo#" + " days").Title("Age");
     columns.Bound(p => p.FeedName).ClientTemplate("<a href='/BreedFeed/Details/#=Id#'>#=FeedName#</a>");
     columns.Bound(p => p.MaleQuantity).ClientTemplate("#=MaleQuantity#" + " grams");
 
@@ -34,7 +34,7 @@
         .PageSize(20)
         .Read(read => read.Action("GetFeeds", "BreedFeed",new { id = Model }))
         .Sort(x => x.Add("BreedType").Ascending())
-        .Sort(x => x.Add("Age").Ascending())
+        .Sort(x => x.Add("AgeFrom").Ascending())
         
      )
     )

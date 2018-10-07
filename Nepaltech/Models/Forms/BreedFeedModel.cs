@@ -22,7 +22,9 @@ namespace Nepaltech.Models.Forms
        
         public string FeedName { get; set; }
         [Required]
-        public int Age { get; set; }
+        public int AgeFrom { get; set; }
+        [Required]
+        public int AgeTo { get; set; }
         [Required(ErrorMessage = "This is Required ")]
         public float MaleQuantity { get; set; }
         [Required(ErrorMessage = "This is Required ")]

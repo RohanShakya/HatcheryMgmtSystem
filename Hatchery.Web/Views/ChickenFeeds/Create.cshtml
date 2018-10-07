@@ -7,7 +7,6 @@
 <form action="@(Url.Action("Create"))" method="post" class="nt-form">
     @Html.HiddenFor(model => model.BatchId)
     @Html.HiddenFor(model => model.BreedId)
-    @Html.HiddenFor(model => model.LocationId)
     
     <div class="row">
         <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="batchid">BatchId</label> </div> </div>
@@ -19,7 +18,13 @@
     
         <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="breedtype">BreedType</label> </div> </div>
         <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.BreedType) </div> </div>
-        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-0 col-md-2"> <div> <label class="control-label" for="age">Age</label> </div> </div>
+        <div class="col-md-offset-0 col-md-3"> <div> @Html.DisplayFor(m => m.Age) days</div> </div>
+    </div>
+
     <div class="row">
         <div class="col-md-offset-0 col-md-2">
             <label class="control-label" for="DateEntry">DateEntry</label>
@@ -90,8 +95,8 @@
     @*<input type="text" id="txtMale" name="txtMale"/><input type="text" id="txtFemale" name="txtFemale"/>*@
    
         <div>
-
             <input type="submit" value="save" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "Details", "Batch", new { id = Model.BatchId }, new { @class = "btn btn-primary" })
         </div>
     </form>
 

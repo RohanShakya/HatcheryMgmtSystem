@@ -12,7 +12,6 @@ namespace Nepaltech.Models.Forms
         public string BatchId { get; set; }
         public List<ChickenFeedModel> ChickenFeeds { get; set; }
         public string BreedId { get; set; }
-        public string LocationId { get; set; }
         public string BatchCode { get; set; }
         public string Breed { get; set; }
         public string BreedTypeId { get; set; }

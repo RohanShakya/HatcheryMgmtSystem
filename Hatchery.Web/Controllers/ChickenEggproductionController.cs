@@ -46,21 +46,7 @@ namespace Hatchery.Web.Controllers
             var model = sunil.AddChickenEggProductionByBatch(id);
             return View(model);
         }
-
-
-        //public JsonResult GetCascadeBreedVaccines(string breeds)
-        //{
-        //    var breedvaccines = db.BreedVaccines.AsQueryable();
-
-        //    if (breedvaccines != null)
-        //    {
-        //        breedvaccines = breedvaccines.Where(p => p.BreedId == breeds);
-        //    }
-
-        //    return Json(breedvaccines.Select(p => new { Id = p.Vaccine.Id, VaccineName = p.Vaccine.VaccineName }), JsonRequestBehavior.AllowGet);
-        //}
-
-
+        
         [HttpPost]
         public ActionResult Create(BatchChickenEggProductionModel model)
         {
@@ -72,7 +58,6 @@ namespace Hatchery.Web.Controllers
                 foreach (var item in model.Chickeneggproduction)
                 {
                     item.BatchId = model.BatchId;
-                    item.LocationId = model.LocationId;
                     item.DateEntry = model.DateEntry;
                   
                     sunil.AddChickenEggProduction(item);

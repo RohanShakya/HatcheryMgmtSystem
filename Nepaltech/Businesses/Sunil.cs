@@ -20,7 +20,7 @@ namespace Nepaltech.Businesses
         public IRepository<Country> CountryManager { get; set; }
         public IRepository<ChickenEggProduction> ChickenEggProductionManager { get; set; }
         public IRepository<Building> BuildingManager { get; set; }
-      //  public IRepository<BatchShifting> BatchShiftingManager { get; set; }
+        //public IRepository<BatchShifting> BatchShiftingManager { get; set; }
 
 
         private readonly IUnitOfWork _unitOfWork;
@@ -271,8 +271,6 @@ namespace Nepaltech.Businesses
             {
 
                 ChickenMortalityModel chickenmortalitymodel = new ChickenMortalityModel();
-                //chickenVaccineModel.Id = entity.Id;
-                //chickenmortalitymodel.BatchChickenId = entity.BatchId;
                 chickenmortalitymodel.BatchId = entity.BatchId;
                 chickenmortalitymodel.FarmName = entity.Farm.Name;
                 chickenmortalitymodel.Location = entity.Location.Location;
@@ -286,8 +284,10 @@ namespace Nepaltech.Businesses
                // model.BreedId = entity.Batch.BreedId;
                 model.BatchId = entity.Batch.Id;
                 model.BatchCode = entity.Batch.Code;
-                model.LocationId = entity.Location.Id;
-                
+                model.Breed = entity.Batch.Breed.Name;
+                model.BreedType = entity.Batch.BreedType.BreedType;
+                model.ArrivalDate = entity.Batch.ArrivalDate;
+                model.Age = (DateTime.Now - model.ArrivalDate).Days;
             }
             return model;
         }
@@ -368,11 +368,10 @@ namespace Nepaltech.Businesses
   
 
 
-//...............................ChickenEggProduction..................>>
-public List<ChickenEggProductionModel> ChickenEggProductionList(string batchId)
-{
-  
-    var entitieslist = ChickenEggProductionManager.GetAll().Where(x => x.DateDeleted == null);
+        //...............................ChickenEggProduction..................>>
+        public List<ChickenEggProductionModel> ChickenEggProductionList(string batchId)
+        {
+            var entitieslist = ChickenEggProductionManager.GetAll().Where(x => x.DateDeleted == null);
             var datalist = entitieslist.Select(x => new ChickenEggProductionModel
             {
                 Id = x.Id,
@@ -385,28 +384,27 @@ public List<ChickenEggProductionModel> ChickenEggProductionList(string batchId)
                 TotalEggs = x.TotalEggs,
                 GoodEggs = x.GoodEggs,
                 SpoiltEggs = x.SpoiltEggs,
+                DateEntry = x.DateEntry,
                 DateCreated = x.DateCreated,
             }).Where(x => x.BatchId == batchId).ToList();
             return datalist;
+        }
 
-     
-}
+        public ChickenEggProductionModel AddChickenEggProduction(string id)
+        {
+            var entity = AddChickenInFarmManager.Find(id);
 
-public ChickenEggProductionModel AddChickenEggProduction(string id)
-{
-    var entity = AddChickenInFarmManager.Find(id);
-
-            ChickenEggProductionModel chickeneggproductionmodel = new ChickenEggProductionModel();
-            //chickenVaccineModel.Id = entity.Id;
-            chickeneggproductionmodel.BatchChickenId = entity.BatchId;
-                        chickeneggproductionmodel.FarmName = entity.Farm.Name;
-            chickeneggproductionmodel.Location = entity.Location.Location;
-           // chickeneggproductionmodel.Breed = entity.Breed.Name;
-            //chickeneggproductionmodel.BreedId = entity.BreedId;
-    //int breedVaccineAge = 2;
-    //chickenVaccineModel.RecommendedDate = entity.ArrivalDate.AddDays(breedVaccineAge);
-    return chickeneggproductionmodel;
-}
+                    ChickenEggProductionModel chickeneggproductionmodel = new ChickenEggProductionModel();
+                    //chickenVaccineModel.Id = entity.Id;
+                    chickeneggproductionmodel.BatchChickenId = entity.BatchId;
+                                chickeneggproductionmodel.FarmName = entity.Farm.Name;
+                    chickeneggproductionmodel.Location = entity.Location.Location;
+                   // chickeneggproductionmodel.Breed = entity.Breed.Name;
+                    //chickeneggproductionmodel.BreedId = entity.BreedId;
+            //int breedVaccineAge = 2;
+            //chickenVaccineModel.RecommendedDate = entity.ArrivalDate.AddDays(breedVaccineAge);
+            return chickeneggproductionmodel;
+        }
 
         public BatchChickenEggProductionModel AddChickenEggProductionByBatch(string batchId)
         {
@@ -427,38 +425,39 @@ public ChickenEggProductionModel AddChickenEggProduction(string id)
                 model.Chickeneggproduction.Add(chickeneggproductionmodel);
                 model.BatchId = entity.Batch.Id;
                 model.BatchCode = entity.Batch.Code;
-                model.LocationId = entity.Location.Id;
+                model.Breed = entity.Batch.Breed.Name;
+                model.BreedType = entity.Batch.BreedType.BreedType;
+                model.ArrivalDate = entity.Batch.ArrivalDate;
+                model.Age = (DateTime.Now - model.ArrivalDate).Days;
             }
             return model;
         }
         //SELECT t1.Name, SUM(t1.Salary + t2.Bonus) as Total From tb1 as t1, tb2 as t2 WHERE t1.Name = t2.Name group by t1.Name order by t1.Salary
         public void AddChickenEggProduction(ChickenEggProductionModel model)
         {
-    var entity = new ChickenEggProduction();
-    entity.Id = Guid.NewGuid().ToString();
-            // entity.BatchChickenId = model.Id;
-            //entity.AgeinWeeks = model.AgeinWeeks;
+            var entity = new ChickenEggProduction();
+            entity.Id = Guid.NewGuid().ToString();
             entity.BatchId = model.BatchId;
             entity.LocationId = model.LocationId;
             entity.TotalEggs = model.TotalEggs;
-    entity.GoodEggs = model.GoodEggs;
+            entity.GoodEggs = model.GoodEggs;
             entity.SpoiltEggs = model.SpoiltEggs;
             entity.DateEntry = model.DateEntry;
-    entity.DateCreated = DateTime.Now;
-    ChickenEggProductionManager.Add(entity);
-    _unitOfWork.DataContext.SaveChanges();
-}
+            entity.DateCreated = DateTime.Now;
+            ChickenEggProductionManager.Add(entity);
+            _unitOfWork.DataContext.SaveChanges();
+        }
 
-public ChickenEggProduction DetailsChickenEggProduction(string id)
-{
-    return ChickenEggProductionManager.Find(id);
+        public ChickenEggProduction DetailsChickenEggProduction(string id)
+        {
+            return ChickenEggProductionManager.Find(id);
 
-}
+        }
 
-public ChickenEggProductionModel EditChickenEggProduction(string id)
-{
-    var entity = ChickenEggProductionManager.Find(id);
-    //var batchChickenEntity = AddChickenInFarmManager.Find(batchChickenId);
+        public ChickenEggProductionModel EditChickenEggProduction(string id)
+        {
+            var entity = ChickenEggProductionManager.Find(id);
+            //var batchChickenEntity = AddChickenInFarmManager.Find(batchChickenId);
 
             ChickenEggProductionModel chickeneggproductionmodel = new ChickenEggProductionModel();
             chickeneggproductionmodel.Id = entity.Id;
@@ -466,8 +465,8 @@ public ChickenEggProductionModel EditChickenEggProduction(string id)
             chickeneggproductionmodel.LocationId = entity.LocationId;
             chickeneggproductionmodel.BatchCode = entity.Batch.Code;
             //chickeneggproductionmodel.BreedId = batchChickenEntity.BreedId;
-           //  chickeneggproductionmodel.FarmName = batchChickenEntity.Farm.Name;
-           // chickeneggproductionmodel.Location = batchChickenEntity.Location.Location;
+            //  chickeneggproductionmodel.FarmName = batchChickenEntity.Farm.Name;
+            // chickeneggproductionmodel.Location = batchChickenEntity.Location.Location;
             //chickeneggproductionmodel.Breed = batchChickenEntity.Breed.Name;
             //chickeneggproductionmodel.AgeinWeeks = entity.AgeinWeeks;
            
@@ -477,8 +476,8 @@ public ChickenEggProductionModel EditChickenEggProduction(string id)
             chickeneggproductionmodel.DateEntry = entity.DateEntry;
             chickeneggproductionmodel.DateCreated = entity.DateCreated;
 
-    return chickeneggproductionmodel;
-}
+            return chickeneggproductionmodel;
+        }
 
         public void EditChickenEggProduction(ChickenEggProductionModel model)
         {
@@ -496,11 +495,11 @@ public ChickenEggProductionModel EditChickenEggProduction(string id)
         }
 
         public void DeleteChickenEggProduction(ChickenEggProduction cm)
-{
-    var chickeneggproduction = ChickenEggProductionManager.Find(cm.Id);
-    ChickenEggProductionManager.Delete(chickeneggproduction);
-    _unitOfWork.DataContext.SaveChanges();
-}
+        {
+            var chickeneggproduction = ChickenEggProductionManager.Find(cm.Id);
+            ChickenEggProductionManager.Delete(chickeneggproduction);
+            _unitOfWork.DataContext.SaveChanges();
+        }
 
         //----------------Building------------------>>
 

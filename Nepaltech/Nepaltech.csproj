@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201810010647191_AddChicken table name changed.Designer.cs">
       <DependentUpon>201810010647191_AddChicken table name changed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810030933232_AgeFrom and AgeTo added in BreedFeeds.cs" />
+    <Compile Include="Migrations\201810030933232_AgeFrom and AgeTo added in BreedFeeds.Designer.cs">
+      <DependentUpon>201810030933232_AgeFrom and AgeTo added in BreedFeeds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Forms\BatchModel.cs" />
     <Compile Include="Models\Forms\BreedTypesModel.cs" />
@@ -271,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810010647191_AddChicken table name changed.resx">
       <DependentUpon>201810010647191_AddChicken table name changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810030933232_AgeFrom and AgeTo added in BreedFeeds.resx">
+      <DependentUpon>201810030933232_AgeFrom and AgeTo added in BreedFeeds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

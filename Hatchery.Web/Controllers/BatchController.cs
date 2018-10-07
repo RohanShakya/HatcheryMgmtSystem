@@ -121,7 +121,7 @@ namespace Hatchery.Web.Controllers
         public ActionResult Details(string id)
         {
             var model = farmservice.DetailsBatch(id);
-            //model.Age = (DateTime.Now - model.ArrivalDate).Days;
+            model.Age = (DateTime.Now - model.ArrivalDate).Days;
             return View(model);
         }
 
