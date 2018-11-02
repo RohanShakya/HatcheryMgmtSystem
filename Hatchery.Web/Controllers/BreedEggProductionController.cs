@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 namespace Hatchery.Web.Controllers
 {
+    [Authorize]
     public class BreedEggProductionController : Controller
     {
         private Nepaltech.Data.HatcheryDb db = new HatcheryDb();

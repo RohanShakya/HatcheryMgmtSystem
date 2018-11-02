@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace Hatchery.Web.Controllers
 {
+    [Authorize]
     public class ChickenMortalityController : Controller
     {
         //GET: ChickenMortality

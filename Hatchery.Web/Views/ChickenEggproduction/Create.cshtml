@@ -42,7 +42,7 @@
             <th>Room No </th>
             <th>GoodEggs </th>
             <th>SpoiltEggs</th>
-            <th>TotalEggs</th>
+            @*<th>TotalEggs</th>*@
         </tr>
 
         @for (int i = 0; i < Model.Chickeneggproduction.Count; i++)
@@ -50,20 +50,17 @@
             <tr>
                 <td>@(Model.Chickeneggproduction[i].Location) @Html.HiddenFor(model => model.Chickeneggproduction[i].LocationId)</td>
                 <td>
-                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].GoodEggs)
+                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].GoodEggs).HtmlAttributes(new {@min="0" })
                     @Html.ValidationMessageFor(model => model.Chickeneggproduction[i].GoodEggs, "", new { @class = "text-danger" })
-                              </td>
-            
-             
+                </td>
                <td>
-                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].SpoiltEggs)
+                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].SpoiltEggs).HtmlAttributes(new { @min = "0" })
                    @Html.ValidationMessageFor(model => model.Chickeneggproduction[i].SpoiltEggs, "", new { @class = "text-danger" })
                 </td>
-                <td>
-                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].TotalEggs)
+                @*<td>
+                    @Html.Kendo().IntegerTextBoxFor(m => m.Chickeneggproduction[i].TotalEggs).HtmlAttributes(new { @min = "0" })
                     @Html.ValidationMessageFor(model => model.Chickeneggproduction[i].TotalEggs, "", new { @class = "text-danger" })
-                </td>
-
+                </td>*@
             </tr>
         }
 
@@ -71,9 +68,20 @@
     <div>
         <input type="submit" value="Save" class="btn btn-default" />
         @Html.ActionLink("Cancel", "Details", "Batch", new { id = Model.BatchId }, new { @class = "btn btn-primary" })
-     
     </div>
 </form>
+<button id="btnn">CLick</button>
+<script>
+    $(document).ready(function () {
+        $("#btnn").click(function () {
+            var goodeggs = $("#Chickeneggproduction_0__GoodEggs").val();
+            var spoilteggs = $("#Chickeneggproduction_0__SpoiltEggs").val();
+            $("#Chickeneggproduction_0__TotalEggs").val(goodeggs + spoilteggs);
+        });
+    });
+
+</script>
+
 @*<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-chickeneggproduction">*@
 
     @*@Html.HiddenFor(model => model.DateCreated)

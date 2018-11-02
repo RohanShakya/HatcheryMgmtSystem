@@ -14,7 +14,7 @@ using System.Data.Common;
 
 namespace Hatchery.Web.Controllers
 {
-
+    [Authorize]
     public class BreedMortalityController : Controller
     {
         private Nepaltech.Data.HatcheryDb db = new HatcheryDb();

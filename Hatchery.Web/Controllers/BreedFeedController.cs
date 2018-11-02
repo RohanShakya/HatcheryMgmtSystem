@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace Hatchery.Web.Controllers
 {
+    [Authorize]
     public class BreedFeedController : Controller
     {
         private HatcheryDb db = new HatcheryDb();

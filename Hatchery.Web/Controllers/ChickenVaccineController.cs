@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace Hatchery.Web.Controllers
 {
+    [Authorize]
     public class ChickenVaccineController : Controller
     {
         private HatcheryDb db = new HatcheryDb();

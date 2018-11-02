@@ -781,7 +781,7 @@ namespace Nepaltech.Businesses
 
         public BatchChickenVaccineModel AddChickenVaccineByBatch(string batchId)
         {
-            var chickeninframs = AddChickenInFarmManager.GetAll().Where(x=>x.DateDeleted==null).Where(x => x.BatchId == batchId).ToList();
+            var chickeninframs = AddChickenInFarmManager.GetAll().Where(x=>x.DateDeleted==null).Where(x => x.BatchId == batchId).OrderBy(x=>x.Location.Location).ToList();
             BatchChickenVaccineModel model = new BatchChickenVaccineModel();
             model.ChickenVaccines = new List<ChickenVaccineModel>();
             foreach (var entity in chickeninframs)

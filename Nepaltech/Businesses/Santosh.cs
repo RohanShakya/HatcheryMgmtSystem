@@ -216,10 +216,11 @@ namespace Nepaltech.Businesses
                 FemaleQuantity = x.FemaleQuantity,
                 GenderId = x.GenderId
 
-       // }).ToList();
-       }).Where(x=>x.BreedId== breedId).ToList();
-            return dataList;
+           // }).ToList();
+           }).Where(x=>x.BreedId== breedId).ToList();
+                return dataList;
         }
+
         public BreedFeedModel AddBreedFeed(string id)
         {
             var entity = BreedManager.Find(id);
@@ -227,7 +228,6 @@ namespace Nepaltech.Businesses
             model.BreedId = entity.Id;
             model.Breed = entity.Name;
             return model;
-
         }
 
 
@@ -394,7 +394,7 @@ namespace Nepaltech.Businesses
 
         public BatchChickenFeedModel AddChickenFeedByBatch(string batchId)
         {
-            var chickeninframs = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).ToList();
+            var chickeninframs = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).OrderBy(x=>x.Location.Location).ToList();
             BatchChickenFeedModel model = new BatchChickenFeedModel();
             model.ChickenFeeds = new List<ChickenFeedModel>();
             foreach (var entity in chickeninframs)

@@ -33,6 +33,7 @@
         .PageSize(20)
         .Read(read => read.Action("GetChickenFeed", "ChickenFeeds", new { id = Model }))
         .Sort(x=>x.Add("DateEntry").Ascending())
+        .Sort(x => x.Add("Location").Ascending())
      )
     )
 </div>

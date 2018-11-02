@@ -14,7 +14,7 @@ using System.Web.Routing;
 
 namespace Hatchery.Web.Controllers
 {
-
+    [Authorize]
     public class AddChickenController : Controller
     {
         private HatcheryDb db = new HatcheryDb();

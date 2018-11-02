@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace Hatchery.Web.Controllers
 {
+    [Authorize]
     public class LocationController : Controller
     {
         private HatcheryDb db = new HatcheryDb();

@@ -264,7 +264,7 @@ namespace Nepaltech.Businesses
         }
         public BatchChickenMortalityModel AddChickenMortalityByBatch(string batchId)
         {
-            var chickeninfarms = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).ToList();
+            var chickeninfarms = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).OrderBy(x=>x.Location.Location).ToList();
             BatchChickenMortalityModel model = new BatchChickenMortalityModel();
             model.Chickenmortality = new List<ChickenMortalityModel>();
             foreach (var entity in chickeninfarms)
@@ -303,8 +303,8 @@ namespace Nepaltech.Businesses
             entity.DateEntry = model.DateEntry;
             entity.DeadChickenMale = model.DeadChickenMale;
             entity.DeadChickenFemale = model.DeadChickenFemale;
-             entity.DateCreated = DateTime.Now;
-                        //var breedVaccine = ChickenEggProductionManager.GetAll().Where(x => x.BreedId == BreedId && x.BreedMortality == entity.BreedMortalityId);
+            entity.DateCreated = DateTime.Now;
+            //var breedVaccine = ChickenEggProductionManager.GetAll().Where(x => x.BreedId == BreedId && x.BreedMortality == entity.BreedMortalityId);
             //int breedVaccineAge = breedVaccine.Select(x => x.Age).Single();
            // entity.RecommendedDate = ArrivalDate.AddDays(breedVaccineAge);
             ChickenMortalityManager.Add(entity);
@@ -337,7 +337,7 @@ namespace Nepaltech.Businesses
             chickenmortalitymodel.DeadChickenMale = entity.DeadChickenMale;
             chickenmortalitymodel.DeadChickenFemale = entity.DeadChickenFemale;
             chickenmortalitymodel.DateEntry = entity.DateEntry;
-                        chickenmortalitymodel.DateCreated = entity.DateCreated;
+            chickenmortalitymodel.DateCreated = entity.DateCreated;
 
             return chickenmortalitymodel;
         }
@@ -408,7 +408,7 @@ namespace Nepaltech.Businesses
 
         public BatchChickenEggProductionModel AddChickenEggProductionByBatch(string batchId)
         {
-            var chickeninfarms = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).ToList();
+            var chickeninfarms = AddChickenInFarmManager.GetAll().Where(x => x.BatchId == batchId).OrderBy(x=>x.Location.Location).ToList();
             BatchChickenEggProductionModel model = new BatchChickenEggProductionModel();
             model.Chickeneggproduction = new List<ChickenEggProductionModel>();
             foreach (var entity in chickeninfarms)
@@ -439,9 +439,9 @@ namespace Nepaltech.Businesses
             entity.Id = Guid.NewGuid().ToString();
             entity.BatchId = model.BatchId;
             entity.LocationId = model.LocationId;
-            entity.TotalEggs = model.TotalEggs;
             entity.GoodEggs = model.GoodEggs;
             entity.SpoiltEggs = model.SpoiltEggs;
+            entity.TotalEggs = entity.GoodEggs + entity.SpoiltEggs;
             entity.DateEntry = model.DateEntry;
             entity.DateCreated = DateTime.Now;
             ChickenEggProductionManager.Add(entity);

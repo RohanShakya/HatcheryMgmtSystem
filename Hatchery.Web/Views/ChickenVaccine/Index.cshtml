@@ -42,6 +42,7 @@
         .PageSize(20)
         .Read(read => read.Action("GetChickenVaccine", "ChickenVaccine", new { id = Model }))
         .Sort(x => x.Add("VaccinationDate").Ascending())
+        .Sort(x => x.Add("Location").Ascending())
      )
     )
 </div>
