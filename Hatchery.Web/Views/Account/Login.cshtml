@@ -28,8 +28,8 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @*<input type="text" class="form-control" placeholder="Email" required="required">*@
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @required = "required" })
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username", @required = "required" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @required = "required" })
