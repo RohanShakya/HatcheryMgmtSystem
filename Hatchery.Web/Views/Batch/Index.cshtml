@@ -33,7 +33,7 @@
     columns.Bound(p => p.ArrivalDate).Format("{0:MMM-dd-yyyy}").Width(150)
           .Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(150);
 
-    columns.Bound(p => p.Age).Width(50).Filterable(false).Width(50);
+    //columns.Bound(p => p.Age).Width(50).Filterable(false).Width(50);
     columns.Bound(p => p.TotalMale).Filterable(false).Width(50);
 
     columns.Bound(p => p.TotalFemale).Filterable(false).Width(50);

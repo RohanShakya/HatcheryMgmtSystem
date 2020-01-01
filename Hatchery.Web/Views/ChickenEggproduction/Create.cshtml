@@ -1,6 +1,6 @@
 ﻿@model Nepaltech.Models.Forms.BatchChickenEggProductionModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Chicken Egg Production";
     //Layout = null;
 }
 
@@ -70,7 +70,7 @@
         @Html.ActionLink("Cancel", "Details", "Batch", new { id = Model.BatchId }, new { @class = "btn btn-primary" })
     </div>
 </form>
-<button id="btnn">CLick</button>
+@*<button id="btnn">CLick</button>
 <script>
     $(document).ready(function () {
         $("#btnn").click(function () {
@@ -80,7 +80,7 @@
         });
     });
 
-</script>
+</script>*@
 
 @*<form action="@(Url.Action("Create"))" method="post" class="nt-form" id="form-add-chickeneggproduction">*@
 
